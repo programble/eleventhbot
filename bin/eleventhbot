@@ -7,9 +7,10 @@ require 'cinch/plugins/identify'
 
 require 'eleventhbot'
 
-%w[spell lastfm].map {|r| require("eleventhbot/#{r}") }
+%w[spell lastfm automeme].map {|r| require("eleventhbot/#{r}") }
 plugins = [EleventhBot::Spell,
-           EleventhBot::Lastfm]
+           EleventhBot::Lastfm,
+           EleventhBot::Automeme]
 
 Configru.load('eleventhbot.yml') do
   option_group :irc do
