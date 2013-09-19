@@ -7,30 +7,32 @@ require 'cinch/plugins/identify'
 
 require 'eleventhbot'
 
-%w[spell lastfm automeme].map {|r| require("eleventhbot/#{r}") }
-plugins = [EleventhBot::Spell,
-           EleventhBot::Lastfm,
-           EleventhBot::Automeme]
+2.times do
+  Configru.load('eleventhbot.yml') do
+    option_group :irc do
+      option_required :server, String
+      option :port, Fixnum, 6667
 
-Configru.load('eleventhbot.yml') do
-  option_group :irc do
-    option_required :server, String
-    option :port, Fixnum, 6667
+      option :nick, String, 'bot11'
+      option :nickserv, String, ''
+      option_array :channels, String
 
-    option :nick, String, 'bot11'
-    option :nickserv, String, ''
-    option_array :channels, String
+      option :prefix, String, '!'
+    end
 
-    option :prefix, String, '!'
-  end
+    option_array :plugins, String
 
-  plugins.each do |plugin|
-    next unless plugin.configru_group
-    option_group plugin.configru_group do
-      instance_eval &plugin.configru_block
+    EleventhBot::Plugin.list.each do |plugin|
+      next unless plugin.configru_group
+      option_group plugin.configru_group do
+        instance_eval &plugin.configru_block
+      end
     end
   end
+
+  Configru.plugins.map {|r| require("eleventhbot/#{r}") }
 end
+
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -52,7 +54,7 @@ bot = Cinch::Bot.new do
       }
     end
 
-    plugins.each do |plugin|
+    EleventhBot::Plugin.list.each do |plugin|
       c.plugins.plugins << plugin
       c.plugins.options[plugin] = Configru[plugin.configru_group.to_s]
     end

@@ -9,8 +9,15 @@ module EleventhBot
       end
     end
 
+    @list = Array.new
+
     def self.included(by)
       by.extend ClassMethods
+      @list << by
+    end
+
+    def self.list
+      @list
     end
   end
 end
