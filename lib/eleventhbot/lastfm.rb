@@ -114,5 +114,29 @@ module EleventhBot
         m.reply("#{user}: #{info['playcount']} plays since #{registered.strftime('%d %b %Y')}")
       end
     end
+
+    match /compare (\S+)$/, method: :compare
+    match /compare (\S+) (\S+)$/, method: :compare
+    def compare(m, user1, user2 = nil)
+      user2 ||= pstore_get(m)
+      api_transaction(m) do
+        compare = @lastfm.tasteometer.compare(:user, :user, user1, user2)
+        score = compare['score'].to_f * 100
+        matches = compare['artists']['matches'].to_i
+        artists = compare['artists']['artist'].map {|x| x['name'] } if matches > 0
+
+        s = String.new
+        s << "#{user1} and #{user2} have "
+        s << '%0.2f' % score << '% similar taste '
+        if matches > 0
+          s << "(#{matches} artist#{matches == 1 || ?s} in common"
+          s << (matches > artists.length ? ', including: ' : ': ')
+          s << artists.join(', ')
+          s << ')'
+        end
+
+        m.reply(s)
+      end
+    end
   end
 end
