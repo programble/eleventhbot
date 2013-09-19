@@ -178,7 +178,7 @@ module EleventhBot
     def hipsterbattle(m, period, users)
       period = period ? period.strip[1..-1] : 'overall'
       hipsters = Hash.new
-      users.split.each do |user|
+      users.split[0..4].each do |user|
         hipsters[user] = calculate_hipster(m, period, user)
       end
       m.reply(hipsters.sort {|a, b| a[1] <=> b[1] }.map {|x| "#{x[0]}: #{'%0.2f' % x[1]}% mainstream" }.join(', '))
