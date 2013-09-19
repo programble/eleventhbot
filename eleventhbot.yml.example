@@ -1,0 +1,17 @@
+irc:
+  nick: bot11
+  nickserv: password
+  prefix: '!'
+  server: irc.example.com # Required
+  port: 6667
+  channels:
+    - '#example'
+
+plugins:
+  - automeme
+  - lastfm
+  - spell
+
+lastfm:
+  token: 00000000000000000000000000000000 # Required
+  secret: 00000000000000000000000000000000 # Required
