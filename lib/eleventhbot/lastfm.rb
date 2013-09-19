@@ -1,5 +1,6 @@
 require 'pstore'
 
+require 'future'
 require 'lastfm'
 require 'time-lord'
 
@@ -21,7 +22,9 @@ module EleventhBot
       @lastfm = ::Lastfm.new(config.token, config.secret)
 
       # TODO: Expire this cache?
-      @chart_top = @lastfm.chart.get_top_artists(:limit => 0).map {|x| x['name'] }
+      @chart_top = future do
+        @lastfm.chart.get_top_artists(:limit => 0).map {|x| x['name'] }
+      end
     end
 
     def api_transaction(m)
