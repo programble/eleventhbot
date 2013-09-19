@@ -138,5 +138,20 @@ module EleventhBot
         m.reply(s)
       end
     end
+
+    match /bestfriend$/, method: :bestfriend
+    match /bestfriend (\S+)$/, method: :bestfriend
+    def bestfriend(m, user = nil)
+      user ||= pstore_get(m)
+      api_transaction(m) do
+        friends = @lastfm.user.get_friends(:user => user, :limit => 0).map {|x| x['name'] }
+        scores = Hash.new
+        friends.each do |friend|
+          scores[friend] = @lastfm.tasteometer.compare(:user, :user, user, friend)['score'].to_f
+        end
+        bestfriend = scores.max {|a, b| a[1] <=> b[1] }.first
+        m.reply("#{user}'s best friend is #{bestfriend}")
+      end
+    end
   end
 end
