@@ -5,6 +5,11 @@ require 'cinch'
 require 'cinch/plugins/basic_ctcp'
 require 'cinch/plugins/identify'
 
+require 'eleventhbot'
+
+%w[spell].map {|r| require("eleventhbot/#{r}") }
+plugins = [EleventhBot::Spell]
+
 Configru.load('eleventhbot.yml') do
   option_group :irc do
     option_required :server, String
@@ -16,9 +21,14 @@ Configru.load('eleventhbot.yml') do
 
     option :prefix, String, '!'
   end
-end
 
-require 'eleventhbot/spell'
+  plugins.each do |plugin|
+    next unless plugin.configru_group
+    option_group plugin.configru_group do
+      instance_eval &plugin.configru_block
+    end
+  end
+end
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -28,9 +38,7 @@ bot = Cinch::Bot.new do
     c.channels = Configru.irc.channels
     c.plugins.prefix = /^#{Regexp.escape(Configru.irc.prefix)}/ # TODO: Respond to nick
 
-    c.plugins.plugins = [Cinch::Plugins::BasicCTCP,
-                         Cinch::Plugins::Identify,
-                         EleventhBot::Spell]
+    c.plugins.plugins = [Cinch::Plugins::BasicCTCP, Cinch::Plugins::Identify]
 
     c.plugins.options[Cinch::Plugins::BasicCTCP][:commands] = [:version, :time, :ping]
 
@@ -40,6 +48,11 @@ bot = Cinch::Bot.new do
         :username => Configru.irc.nick,
         :password => Configru.irc.nickserv
       }
+    end
+
+    plugins.each do |plugin|
+      c.plugins.plugins << plugin
+      c.plugins.options[plugin] = Configru[plugin.configru_group.to_s]
     end
   end
 

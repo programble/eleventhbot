@@ -2,7 +2,7 @@ require 'ffi/aspell'
 
 module EleventhBot
   class Spell
-    include Cinch::Plugin
+    include Plugin, Cinch::Plugin
 
     def initialize(*args)
       super(*args)
