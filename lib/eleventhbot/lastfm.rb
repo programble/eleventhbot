@@ -183,5 +183,47 @@ module EleventhBot
       end
       m.reply(hipsters.sort {|a, b| a[1] <=> b[1] }.map {|x| "#{x[0]}: #{'%0.2f' % x[1]}% mainstream" }.join(', '))
     end
+
+    match /topartists( -\S+)?$/, method: :topartists
+    match /topartists (-\S+ )?([^-\s]+)$/, method: :topartists
+    def topartists(m, period, user = nil)
+      user ||= pstore_get(m)
+      period = period ? period.strip[1..-1] : 'overall'
+      api_transaction(m) do
+        top = @lastfm.user.get_top_artists(:user => user,
+                                           :period => period,
+                                           :limit => 5)
+        s = top.map {|x| "#{x['name']} (#{x['playcount']} plays)" }.join(', ')
+        m.reply("#{user}: #{s}")
+      end
+    end
+
+    match /topalbums( -\S+)?$/, method: :topalbums
+    match /topalbums (-\S+ )?([^-\s]+)$/, method: :topalbums
+    def topalbums(m, period, user = nil)
+      user ||= pstore_get(m)
+      period = period ? period.strip[1..-1] : 'overall'
+      api_transaction(m) do
+        top = @lastfm.user.get_top_albums(:user => user,
+                                          :period => period,
+                                          :limit => 5)
+        s = top.map {|x| "#{x['artist']['name']} - #{x['name']} (#{x['playcount']} plays)" }.join(', ')
+        m.reply("#{user}: #{s}")
+      end
+    end
+
+    match /toptracks( -\S+)?$/, method: :toptracks
+    match /toptracks (-\S+ )?([^-\s]+)$/, method: :toptracks
+    def toptracks(m, period, user = nil)
+      user ||= pstore_get(m)
+      period = period ? period.strip[1..-1] : 'overall'
+      api_transaction(m) do
+        top = @lastfm.user.get_top_tracks(:user => user,
+                                          :period => period,
+                                          :limit => 5)
+        s = top.map {|x| "#{x['artist']['name']} - #{x['name']} (#{x['playcount']} plays)" }.join(', ')
+        m.reply("#{user}: #{s}")
+      end
+    end
   end
 end
