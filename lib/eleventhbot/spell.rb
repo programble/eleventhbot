@@ -5,7 +5,7 @@ module EleventhBot
     include Plugin, Cinch::Plugin
 
     def initialize(*args)
-      super(*args)
+      super
 
       @last = {}
       @speller = FFI::Aspell::Speller.new
