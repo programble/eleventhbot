@@ -153,5 +153,25 @@ module EleventhBot
         m.reply("#{user}'s best friend is #{bestfriend}")
       end
     end
+
+    def calculate_hipster(m, period, user)
+      api_transaction(m) do
+        user_top = @lastfm.user.get_top_artists(:user => user, :period => period)
+        total_weight = user_top.map {|x| x['playcount'].to_i }.reduce(:+)
+        score = 0
+        user_top.each do |artist|
+          score += artist['playcount'].to_i if @chart_top.include?(artist['name'])
+        end
+        score.to_f / total_weight * 100.0
+      end
+    end
+
+    match /hipster( -\S+)?$/, method: :hipster
+    match /hipster (-\S+ )?([^-\s]+)$/, method: :hipster
+    def hipster(m, period, user = nil)
+      user ||= pstore_get(m)
+      hipster = calculate_hipster(m, period ? period.strip[1..-1] : 'overall', user)
+      m.reply("#{user} is #{'%0.2f' % hipster}% mainstream")
+    end
   end
 end
