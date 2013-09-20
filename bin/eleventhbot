@@ -46,7 +46,7 @@ bot = Cinch::Bot.new do
     c.server = Configru.irc.server
     c.port = Configru.irc.port
     c.channels = Configru.irc.channels
-    c.plugins.prefix = /^#{Regexp.escape(Configru.irc.prefix)}/ # TODO: Respond to nick
+    c.plugins.prefix = /^(?:#{Regexp.escape(Configru.irc.prefix)}|#{Regexp.escape(c.nick)}_*[:,]\s+)/
 
     c.plugins.plugins = [Cinch::Plugins::BasicCTCP, Cinch::Plugins::Identify]
 
