@@ -14,10 +14,16 @@ require 'eleventhbot'
       option :port, Fixnum, 6667
 
       option :nick, String, 'bot11'
-      option :nickserv, String, ''
+      option :prefix, String, '!'
+
       option_array :channels, String
 
-      option :prefix, String, '!'
+      option :nickserv, String, ''
+
+      option_group :sasl do
+        option :username, String, ''
+        option :password, String, ''
+      end
     end
 
     option_array :plugins, String
@@ -52,6 +58,11 @@ bot = Cinch::Bot.new do
         :username => Configru.irc.nick,
         :password => Configru.irc.nickserv
       }
+    end
+
+    unless Configru.irc.sasl.username.empty?
+      c.sasl.username = Configru.irc.sasl.username
+      c.sasl.password = Configru.irc.sasl.password
     end
 
     EleventhBot::Plugin.list.each do |plugin|

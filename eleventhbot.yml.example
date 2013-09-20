@@ -1,14 +1,18 @@
 irc:
-  nick: bot11
-  nickserv: password
-  prefix: '!'
   server: irc.example.com # Required
   port: 6667
+  nick: bot11
+  prefix: '!'
   channels:
     - '#example'
+  nickserv: password
+  sasl:
+    username: username
+    password: password
 
 plugins:
   - automeme
+  - destiny
   - lastfm
   - spell
 
