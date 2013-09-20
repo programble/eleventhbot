@@ -15,3 +15,5 @@ plugins:
 lastfm:
   token: 00000000000000000000000000000000 # Required
   secret: 00000000000000000000000000000000 # Required
+  pstore: lastfm.pstore
+  chart: lastfm.chart
