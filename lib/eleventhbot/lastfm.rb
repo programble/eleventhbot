@@ -13,6 +13,7 @@ module EleventhBot
       option_required :secret, String
 
       option :pstore, String, 'lastfm.pstore'
+      option :chart, String, 'lastfm.chart'
     end
 
     def initialize(*args)
@@ -23,7 +24,13 @@ module EleventhBot
 
       # TODO: Expire this cache?
       @chart_top = future do
-        @lastfm.chart.get_top_artists(:limit => 0).map {|x| x['name'] }
+        if File.exist? config.chart
+          File.readlines(config.chart).map(&:chomp)
+        else
+          chart = @lastfm.chart.get_top_artists(:limit => 0).map {|x| x['name'] }
+          File.open(config.chart, 'w') {|f| f.puts(chart) }
+          chart
+        end
       end
     end
 
