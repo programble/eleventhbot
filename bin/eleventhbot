@@ -47,6 +47,7 @@ bot = Cinch::Bot.new do
     c.port = Configru.irc.port
     c.channels = Configru.irc.channels
     c.plugins.prefix = /^(?:#{Regexp.escape(Configru.irc.prefix)}|#{Regexp.escape(c.nick)}_*[:,]\s+)/
+    c.plugins.suffix = /\s*$/ # Allow trailing whitespace
 
     c.plugins.plugins = [Cinch::Plugins::BasicCTCP, Cinch::Plugins::Identify]
 

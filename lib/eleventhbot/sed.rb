@@ -26,7 +26,7 @@ module EleventhBot
       end
     end
 
-    match %r"^((?:#{Regexp.escape(Configru.irc.prefix)})*)s/((?:[^\\/]|\\.)*)/((?:[^\\/]|\\.)*)/([igx]*)", use_prefix: false
+    match %r"^((?:#{Regexp.escape(Configru.irc.prefix)})*)s/((?:[^\\/]|\\.)*)/((?:[^\\/]|\\.)*)/([igx]*)", use_prefix: false, use_suffix: false
     def execute(m, prefix, match, replace, flags)
       replace.gsub!(/(?<!\\)((?:\\\\)*)\\\//, '\1/') # Unescape escaped /'s
 
