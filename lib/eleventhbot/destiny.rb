@@ -23,7 +23,7 @@ module EleventhBot
       'Why not'
     ]
 
-    match /(?:destiny|choose)(?: (.+))?$/
+    match /(?:destiny|choose)(?: (.+))?/
     def execute(m, choices)
       choice = (choices ? choices.split(choices[?,] || $;).map(&:strip) : %w[yes no]).sample
       m.reply("#{PHRASES.sample} #{choice}", true)

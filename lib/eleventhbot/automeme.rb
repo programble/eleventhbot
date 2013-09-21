@@ -9,9 +9,8 @@ module EleventhBot
       @memes = []
     end
 
-    match /(?:auto)?meme$/
-    match /(?:auto)?meme (.+)/
-    def execute(m, target = nil)
+    match /(?:auto)?meme(?: (.+))?/
+    def execute(m, target)
       @memes = open('http://api.automeme.net/text').read.split("\n") if @memes.empty?
       m.reply("#{target + ': ' if target}#{@memes.shift}")
     end

@@ -20,7 +20,7 @@ module EleventhBot
       @last[m.channel] = m unless @bot.config.plugins.prefix === m.message
     end
 
-    match /spell(\+*)$/, method: :spell_last
+    match /spell(\+*)/, method: :spell_last
     def spell_last(m, i)
       last = @last[m.channel]
       if last.action?
