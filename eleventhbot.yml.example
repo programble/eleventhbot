@@ -12,16 +12,16 @@ irc:
 
 plugins:
   - automeme
-  - sed
   - destiny
   - lastfm
+  - sed
   - spell
-
-sed:
-  memory: 5
 
 lastfm:
   token: 00000000000000000000000000000000 # Required
   secret: 00000000000000000000000000000000 # Required
   pstore: lastfm.pstore
   chart: lastfm.chart
+
+sed:
+  memory: 5
