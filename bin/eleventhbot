@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+
 require 'configru'
 require 'cinch'
 require 'cinch/plugins/basic_ctcp'
