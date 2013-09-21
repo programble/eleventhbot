@@ -12,9 +12,13 @@ irc:
 
 plugins:
   - automeme
+  - sed
   - destiny
   - lastfm
   - spell
+
+sed:
+  memory: 5
 
 lastfm:
   token: 00000000000000000000000000000000 # Required
