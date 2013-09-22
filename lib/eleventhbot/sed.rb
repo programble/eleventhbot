@@ -4,7 +4,7 @@ module EleventhBot
   class Sed
     include Plugin, Cinch::Plugin
 
-    configru :sed do
+    configru do
       option :memory, Fixnum, 5
     end
 

@@ -31,8 +31,8 @@ require 'eleventhbot'
     option_array :plugins, String
 
     EleventhBot::Plugin.list.each do |plugin|
-      next unless plugin.configru_group
-      option_group plugin.configru_group do
+      next unless plugin.configru_block
+      option_group plugin.plugin_name do
         instance_eval &plugin.configru_block
       end
     end
@@ -70,7 +70,7 @@ bot = Cinch::Bot.new do
 
     EleventhBot::Plugin.list.each do |plugin|
       c.plugins.plugins << plugin
-      c.plugins.options[plugin] = Configru[plugin.configru_group.to_s]
+      c.plugins.options[plugin] = Configru[plugin.plugin_name]
     end
   end
 

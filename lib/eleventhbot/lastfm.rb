@@ -8,7 +8,7 @@ module EleventhBot
   class Lastfm
     include Plugin, Cinch::Plugin
 
-    configru :lastfm do
+    configru do
       option_required :token, String
       option_required :secret, String
 

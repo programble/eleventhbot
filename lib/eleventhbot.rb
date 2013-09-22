@@ -1,10 +1,9 @@
 module EleventhBot
   module Plugin
     module ClassMethods
-      attr_reader :configru_group, :configru_block
+      attr_reader :configru_block
 
-      def configru(group, &block)
-        @configru_group = group
+      def configru(&block)
         @configru_block = block
       end
     end
