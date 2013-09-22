@@ -93,9 +93,9 @@ module EleventhBot
       api_transaction(m) do
         track = @lastfm.user.get_recent_tracks(user).first
         if track['nowplaying']
-          Channel(channel).msg("#{m.user.nick} is listening to #{format_track(track, false)}")
+          Channel(channel).msg("* #{m.user.nick} is listening to #{format_track(track, false)}")
         else
-          Channel(channel).msg("#{m.user.nick} last listened to #{format_track(track)}")
+          Channel(channel).msg("* #{m.user.nick} last listened to #{format_track(track)}")
         end
       end
     end
