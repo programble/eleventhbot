@@ -2,6 +2,77 @@
 
 The real bot. The best bot.
 
+## Plugins
+
+### Automeme
+
+```yaml
+plugins:
+  - automeme
+```
+
+Commands: `meme`, `automeme`
+
+Uses the [Automeme.net](http://automeme.net) API to generate random
+memes.
+
+### Destiny
+
+```yaml
+plugins:
+  - destiny
+```
+
+Commands: `destiny`, `choose`
+
+Chooses an item randomly from a list.
+
+### Lastfm
+
+```yaml
+plugins:
+  - lastfm
+
+lastfm:
+  token: 00000000000000000000000000000000
+  secret: 00000000000000000000000000000000
+  pstore: lastfm.pstore # File to store user associations in
+  chart: lastfm.chart # File to cache artist charts in
+```
+
+Commands: `assoc`, `assoc?`, `last`, `inform`, `first`, `compare`,
+`bestfriend`, `hipster`, `hipsterbattle`, `topartists`, `topalbums`,
+`toptracks`
+
+Fetches information from [Last.fm](http://www.last.fm). A Last.fm API
+account is required, and can be created
+[here](http://www.last.fm/api/account/create).
+
+### Sed
+
+```yaml
+plugins:
+  - sed
+
+sed:
+  memory: 5 # Number of previous lines to remember
+```
+
+Provides sed-like modification of previous lines using `s/ma/re/`
+syntax.
+
+### Spell
+
+```yaml
+plugins:
+  - spell
+```
+
+Commands: `spell`
+
+Uses [Aspell](http://aspell.net) to correct spelling. `libaspell` must
+be installed.
+
 ## License
 
 Copyright © 2013, Curtis McEnroe <programble@gmail.com>
