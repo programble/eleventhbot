@@ -27,6 +27,8 @@ GEM
     ffi (1.9.0)
     ffi-aspell (0.0.3)
       ffi (>= 1.0.11)
+    ffi-hunspell (0.3.0)
+      ffi (~> 1.0)
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
@@ -49,7 +51,8 @@ DEPENDENCIES
   cinch-basic_ctcp (~> 1.0.0)
   cinch-identify (~> 1.4.0)
   configru (~> 3.2.0)
-  ffi-aspell
+  ffi-aspell (~> 0.0.3)
+  ffi-hunspell (~> 0.3.0)
   lastfm!
   promise (~> 0.2.0)
   time-lord (~> 1.0.0)

@@ -25,3 +25,7 @@ lastfm:
 
 sed:
   memory: 5
+
+spell:
+  checker: hunspell # hunspell or aspell
+  language: en_US

@@ -7,7 +7,8 @@ gem 'configru', '~> 3.2.0'
 gem 'promise', '~> 0.2.0'
 
 # Spell
-gem 'ffi-aspell'
+gem 'ffi-hunspell', '~> 0.3.0'
+gem 'ffi-aspell', '~> 0.0.3'
 
 # Lastfm
 gem "lastfm", :git => "https://github.com/programble/ruby-lastfm.git", :branch => "lastirc"

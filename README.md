@@ -66,12 +66,17 @@ syntax.
 ```yaml
 plugins:
   - spell
+
+spell:
+  checker: hunspell # hunspell or aspell
+  language: en_US
 ```
 
 Commands: `spell`
 
-Uses [Aspell](http://aspell.net) to correct spelling. `libaspell` must
-be installed.
+Uses [Hunspell](http://hunspell.sourceforge.net) or
+[Aspell](http://aspell.net) to correct spelling. The selected checker
+and dictionary must be installed.
 
 ## License
 
