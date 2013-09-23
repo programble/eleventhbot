@@ -19,7 +19,15 @@ module EleventhBot
       case config.checker
       when 'hunspell'
         FFI::Hunspell.dict(config.language) do |dict|
-          s.gsub!(WORD_REGEXP) {|w| dict.suggest(w)[i] || w }
+          s.gsub!(WORD_REGEXP) do |w|
+            if dict.check?(w) && i == 0
+              w
+            else
+              suggest = dict.suggest(w)
+              suggest.delete(w)
+              suggest[i] || w
+            end
+          end
         end
         s
       when 'aspell'
