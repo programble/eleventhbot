@@ -30,9 +30,9 @@ module EleventhBot
       end
     end
 
-    command :provides?, /provides\?? (\S+)/,
-      'provides? {topic}: Show which plugin provides a help topic'
-    def provides?(m, topic)
+    command :provides, /provides\?? (\S+)/,
+      'provides {topic}: Show which plugin provides a help topic'
+    def provides(m, topic)
       plugin = bot_plugins.find {|p| p.help_topics.include? topic }
       if plugin
         m.reply("#{topic} is provided by #{plugin.plugin_name}", true)
