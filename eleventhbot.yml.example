@@ -1,6 +1,7 @@
 irc:
   server: irc.example.com # Required
   port: 6667
+  ssl: false
   nick: bot11
   prefix: '!'
   channels:

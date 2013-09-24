@@ -14,6 +14,7 @@ require 'eleventhbot'
     option_group :irc do
       option_required :server, String
       option :port, Fixnum, 6667
+      option_bool :ssl, false
 
       option :nick, String, 'bot11'
       option :prefix, String, '!'
@@ -47,6 +48,7 @@ bot = Cinch::Bot.new do
     c.nick = Configru.irc.nick
     c.server = Configru.irc.server
     c.port = Configru.irc.port
+    c.ssl.use = Configru.irc.ssl
     c.channels = Configru.irc.channels
     c.plugins.prefix = /^(?:#{Regexp.escape(Configru.irc.prefix)}|#{Regexp.escape(c.nick)}_*[:,]\s+)/
     c.plugins.suffix = /\s*$/ # Allow trailing whitespace
