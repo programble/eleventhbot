@@ -23,7 +23,7 @@ GEM
       cinch (~> 2.0)
     cinch-identify (1.4.1)
       cinch (~> 2.0)
-    configru (3.2.0)
+    configru (3.3.0)
     ffi (1.9.0)
     ffi-aspell (0.0.3)
       ffi (>= 1.0.11)
@@ -50,7 +50,7 @@ DEPENDENCIES
   cinch (~> 2.0.0)
   cinch-basic_ctcp (~> 1.0.0)
   cinch-identify (~> 1.4.0)
-  configru (~> 3.2.0)
+  configru (~> 3.3.0)
   ffi-aspell (~> 0.0.3)
   ffi-hunspell (~> 0.3.0)
   lastfm!
