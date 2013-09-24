@@ -13,6 +13,7 @@ irc:
 plugins:
   - automeme
   - destiny
+  - help
   - lastfm
   - sed
   - spell

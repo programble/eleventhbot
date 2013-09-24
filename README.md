@@ -27,6 +27,17 @@ Commands: `destiny`, `choose`
 
 Chooses an item randomly from a list.
 
+### Help
+
+```yaml
+plugins:
+  - help
+```
+
+Commands: `list`, `provides?`, `help`
+
+Provides access to help topics.
+
 ### Lastfm
 
 ```yaml
