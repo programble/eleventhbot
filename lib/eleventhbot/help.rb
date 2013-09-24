@@ -6,6 +6,13 @@ module EleventhBot
       @bot.config.plugins.plugins.select {|p| p.include? Plugin }
     end
 
+    command :prefix, /prefix/,
+      'prefix: Show the command prefix',
+      method: :show_prefix
+    def show_prefix(m)
+      m.reply(Configru.irc.prefix, true)
+    end
+
     command :list, /list(?: (\S+))?/,
       'list [plugin]: List all plugins or help topics provided by a plugin'
     def list(m, name)
