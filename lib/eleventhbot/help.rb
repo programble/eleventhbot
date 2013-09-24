@@ -15,7 +15,7 @@ module EleventhBot
         if plugin.help_topics.empty?
           m.reply("#{name} provides no help topics", true)
         else
-          m.reply("#{name}: #{plugin.help_topics.keys.join(', ')}", true)
+          m.reply(plugin.help_topics.keys.join(', '), true)
         end
       else
         plugins = bot_plugins.map(&:plugin_name)
