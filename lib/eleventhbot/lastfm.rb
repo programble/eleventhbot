@@ -59,7 +59,8 @@ module EleventhBot
       s << ')'
     end
 
-    match /assoc(?:iate)?\?(?: (\S+))?/, method: :associate?
+    command :associate?, /assoc(?:iate)?\?(?: (\S+))?/,
+      'associate? [nick]: Show which Last.fm account is associated with a nick'
     def associate?(m, nick)
       nick ||= m.user.nick
       assoc = @pstore.transaction(true) { @pstore[nick] }
@@ -70,13 +71,15 @@ module EleventhBot
       end
     end
 
-    match /assoc(?:iate)? (\S+)/, method: :associate
+    command :associate, /assoc(?:iate)? (\S+)/,
+      'associate {username}: Associate your nick with a Last.fm account'
     def associate(m, user)
       @pstore.transaction { @pstore[m.user.nick] = user }
       m.reply("Your nick is now associated with the Last.fm account '#{user}'", true)
     end
 
-    match /last(?: -(\d+))?(?: (\S+))?/, method: :last
+    command :last, /last(?: -(\d+))?(?: (\S+))?/,
+      'last [-n] [username]: Show the nth to last track scrobbled by a Last.fm user'
     def last(m, index, user)
       user ||= pstore_get(m)
       index = index ? index.to_i : 1
@@ -86,7 +89,8 @@ module EleventhBot
       end
     end
 
-    match /inform (#\S+)/, method: :inform
+    command :inform, /inform (#\S+)/,
+      'inform {channel}: Inform a channel of what you are scrobbling to Last.fm'
     def inform(m, channel)
       user = pstore_get(m)
       return m.reply("Your nick is not associated with a Last.fm account", true) unless user
@@ -100,7 +104,8 @@ module EleventhBot
       end
     end
 
-    match /first(?: (\S+))?/, method: :first
+    command :first, /first(?: (\S+))?/,
+      'first [username]: Show the first track scrobbled by a Last.fm user'
     def first(m, user)
       user ||= pstore_get(m)
       api_transaction(m) do
@@ -111,7 +116,8 @@ module EleventhBot
       end
     end
 
-    match /plays(?: (\S+))?/, method: :plays
+    command :plays, /plays(?: (\S+))?/,
+      'plays [username]: Show the number of scrobbles by a Last.fm user'
     def plays(m, user)
       user ||= pstore_get(m)
       api_transaction(m) do
@@ -121,7 +127,8 @@ module EleventhBot
       end
     end
 
-    match /compare (\S+)(?: (\S+))?/, method: :compare
+    command :compare, /compare (\S+)(?: (\S+))?/,
+      'compare {username} [username]: Compare the tastes of two Last.fm users'
     def compare(m, user1, user2)
       user2 ||= pstore_get(m)
       api_transaction(m) do
@@ -144,7 +151,8 @@ module EleventhBot
       end
     end
 
-    match /bestfriend(?: (\S+))?/, method: :bestfriend
+    command :bestfriend, /bestfriend(?: (\S+))?/,
+      'bestfriend [username]: Find the friend with most similar taste of a Last.fm user'
     def bestfriend(m, user)
       user ||= pstore_get(m)
       api_transaction(m) do
@@ -170,14 +178,16 @@ module EleventhBot
       end
     end
 
-    match /hipster(?: -(\S+))?(?: (\S+))?/, method: :hipster
+    command :hipster, /hipster(?: -(\S+))?(?: (\S+))?/,
+      "hipster [-period] [username]: Calculate how mainstream a Last.fm user's taste is over a period"
     def hipster(m, period, user)
       user ||= pstore_get(m)
       hipster = calculate_hipster(m, period || 'overall', user)
       m.reply("#{user} is #{'%0.2f' % hipster}% mainstream")
     end
 
-    match /hipsterbattle (?:-(\S+) )?(.+)/, method: :hipsterbattle
+    command :hipsterbattle, /hipsterbattle (?:-(\S+) )?(.+)/,
+      "hipsterbattle [-period] {usernames...}: Calculate which Last.fm user's taste is most mainstream over a period"
     def hipsterbattle(m, period, users)
       hipsters = Hash.new
       users.split[0..4].each do |user|
@@ -186,7 +196,8 @@ module EleventhBot
       m.reply(hipsters.sort {|a, b| a[1] <=> b[1] }.map {|x| "#{x[0]}: #{'%0.2f' % x[1]}% mainstream" }.join(', '))
     end
 
-    match /topartists(?: -(\S+))?(?: (\S+))?/, method: :topartists
+    command :topartists, /topartists(?: -(\S+))?(?: (\S+))?/,
+      "topartists [-period] [username]: List a Last.fm user's top listened artists over a period"
     def topartists(m, period, user)
       user ||= pstore_get(m)
       api_transaction(m) do
@@ -198,7 +209,8 @@ module EleventhBot
       end
     end
 
-    match /topalbums(?: -(\S+))?(?: (\S+))?/, method: :topalbums
+    command :topalbums, /topalbums(?: -(\S+))?(?: (\S+))?/,
+      "topalbums [-period] [username]: List a Last.fm user's top listened albums over a period"
     def topalbums(m, period, user)
       user ||= pstore_get(m)
       api_transaction(m) do
@@ -210,7 +222,8 @@ module EleventhBot
       end
     end
 
-    match /toptracks(?: -(\S+))?(?: (\S+))?/, method: :toptracks
+    command :toptracks, /toptracks(?: -(\S+))?(?: (\S+))?/,
+      "toptracks [-period] [username]: List a Last.fm user's top listened tracks over a period"
     def toptracks(m, period, user)
       user ||= pstore_get(m)
       api_transaction(m) do

@@ -41,19 +41,19 @@ module EleventhBot
       @last[m.channel] = m unless @bot.config.plugins.prefix === m.message
     end
 
-    match /spell(\+*)/, method: :spell_last
-    def spell_last(m, i)
-      last = @last[m.channel]
-      if last.action?
-        m.reply("* #{last.user.nick} #{correct(last.action_message, i.length)}")
-      else
-        m.reply("<#{last.user.nick}> #{correct(last.message, i.length)}")
-      end
-    end
-
-    match /spell(\+*) (.+)/, method: :spell
+    command :spell, /spell(\+*)(?: (.+))?/,
+      "spell[+*] [text]: Correct spelling of text or last line in channel, replacing words with the nth suggestion based on the number of +'s"
     def spell(m, i, s)
-      m.reply(correct(s, i.length), true)
+      if s
+        m.reply(correct(s, i.length), true)
+      else
+        last = @last[m.channel]
+        if last.action?
+          m.reply("* #{last.user.nick} #{correct(last.action_message, i.length)}")
+        else
+          m.reply("<#{last.user.nick}> #{correct(last.message, i.length)}")
+        end
+      end
     end
   end
 end

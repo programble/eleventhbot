@@ -23,8 +23,9 @@ module EleventhBot
       'Why not'
     ]
 
-    match /(?:destiny|choose)(?: (.+))?/
-    def execute(m, choices)
+    command :destiny, /(?:destiny|choose)(?: (.+))?/,
+      'destiny [choices]: Randomly choose an item from a list of choices, or between yes and no'
+    def destiny(m, choices)
       choice = (choices ? choices.split(choices[?,] || $;).map(&:strip) : %w[yes no]).sample
       m.reply("#{PHRASES.sample} #{choice}", true)
     end

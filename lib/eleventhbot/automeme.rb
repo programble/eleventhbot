@@ -9,8 +9,9 @@ module EleventhBot
       @memes = []
     end
 
-    match /(?:auto)?meme(?: (.+))?/
-    def execute(m, target)
+    command :meme, /(?:auto)?meme(?: (.+))?/,
+      'meme [target]: Generate a random meme, optionally at a target'
+    def meme(m, target)
       @memes = open('http://api.automeme.net/text').read.split("\n") if @memes.empty?
       m.reply("#{target + ': ' if target}#{@memes.shift}")
     end
