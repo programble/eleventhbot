@@ -18,7 +18,7 @@ module EleventhBot
     def list(m, name)
       if name
         plugin = bot_plugins.find {|p| p.plugin_name == name }
-        return unless plugin
+        return m.reply("#{name} does not exist", true) unless plugin
         if plugin.help_topics.empty?
           m.reply("#{name} provides no help topics", true)
         else
