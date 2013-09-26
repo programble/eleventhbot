@@ -12,12 +12,17 @@ irc:
     password: password
 
 plugins:
+  - admin
   - automeme
   - destiny
   - help
   - lastfm
   - sed
   - spell
+
+admin:
+  masks:
+    - '*!*example@example.com'
 
 lastfm:
   token: 00000000000000000000000000000000 # Required

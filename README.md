@@ -4,6 +4,22 @@ The real bot. The best bot.
 
 ## Plugins
 
+### Admin
+
+```yaml
+plugins:
+  - admin
+
+admin:
+  masks:
+    - '*!*example@example.com'
+```
+
+Commands: `say`, `action`, `nick`, `join`, `part`, `plugins`, `enable`,
+`disable`, `reload`
+
+Provides administrative commands.
+
 ### Automeme
 
 ```yaml
