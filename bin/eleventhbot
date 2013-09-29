@@ -42,7 +42,6 @@ require 'eleventhbot'
   Configru.plugins.map {|r| require("eleventhbot/#{r}") }
 end
 
-
 bot = Cinch::Bot.new do
   configure do |c|
     c.nick = Configru.irc.nick
