@@ -54,6 +54,19 @@ Commands: `list`, `provides?`, `help`
 
 Provides access to help topics.
 
+### Ignore
+
+```yaml
+plugins:
+  - ignore
+
+ignore:
+  masks:
+    - '*!*example@example.com'
+```
+
+Prevents users matching masks from using commands.
+
 ### Lastfm
 
 ```yaml

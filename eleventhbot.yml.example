@@ -16,11 +16,16 @@ plugins:
   - automeme
   - destiny
   - help
+  - ignore
   - lastfm
   - sed
   - spell
 
 admin:
+  masks:
+    - '*!*example@example.com'
+
+ignore:
   masks:
     - '*!*example@example.com'
 
