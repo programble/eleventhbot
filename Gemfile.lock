@@ -21,7 +21,7 @@ GEM
     cinch (2.0.9)
     cinch-basic_ctcp (1.0.2)
       cinch (~> 2.0)
-    cinch-identify (1.4.1)
+    cinch-identify (1.5.0)
       cinch (~> 2.0)
     configru (3.3.0)
     ffi (1.9.0)
@@ -49,7 +49,7 @@ PLATFORMS
 DEPENDENCIES
   cinch (~> 2.0.0)
   cinch-basic_ctcp (~> 1.0.0)
-  cinch-identify (~> 1.4.0)
+  cinch-identify (~> 1.5.0)
   configru (~> 3.3.0)
   ffi-aspell (~> 0.0.3)
   ffi-hunspell (~> 0.3.0)
