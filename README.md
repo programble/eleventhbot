@@ -43,6 +43,22 @@ Commands: `destiny`, `choose`
 
 Chooses an item randomly from a list.
 
+### Freebase
+
+```yaml
+plugins:
+  - freebase
+
+freebase:
+  key: 000000000000000000000000000000000000000
+```
+
+Commands: `info`
+
+Retrieves information from Freebase. An API key is optional and can be
+obtained from [Google APIs
+Console](https://code.google.com/apis/console).
+
 ### Help
 
 ```yaml

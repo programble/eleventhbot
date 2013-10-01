@@ -15,6 +15,7 @@ plugins:
   - admin
   - automeme
   - destiny
+  - freebase
   - help
   - ignore
   - lastfm
@@ -24,6 +25,9 @@ plugins:
 admin:
   masks:
     - '*!*example@example.com'
+
+freebase:
+  key: 000000000000000000000000000000000000000
 
 ignore:
   masks:
