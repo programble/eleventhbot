@@ -4,6 +4,20 @@ The real bot. The best bot.
 
 ## Plugins
 
+### Acronym
+
+```yaml
+plugins:
+  - acronym
+
+acronym:
+  words: /usr/share/dict/words
+```
+
+Commands: `acronym`
+
+Suggests possible meanings of acronyms.
+
 ### Admin
 
 ```yaml

@@ -12,6 +12,7 @@ irc:
     password: password
 
 plugins:
+  - acronym
   - admin
   - automeme
   - destiny
@@ -21,6 +22,9 @@ plugins:
   - lastfm
   - sed
   - spell
+
+acronym:
+  words: /usr/share/dict/words
 
 admin:
   masks:
