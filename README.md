@@ -97,6 +97,20 @@ ignore:
 
 Prevents users matching masks from using commands.
 
+### Karma
+
+```yaml
+plugins:
+  - karma
+
+karma:
+  pstore: karma.pstore
+```
+
+Commands: `karma`
+
+Keeps track of karma increased by "thing++" and decreased by "thing--".
+
 ### Lastfm
 
 ```yaml

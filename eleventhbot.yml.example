@@ -19,6 +19,7 @@ plugins:
   - freebase
   - help
   - ignore
+  - karma
   - lastfm
   - sed
   - spell
@@ -36,6 +37,9 @@ freebase:
 ignore:
   masks:
     - '*!*example@example.com'
+
+karma:
+  pstore: karma.pstore
 
 lastfm:
   token: 00000000000000000000000000000000 # Required
