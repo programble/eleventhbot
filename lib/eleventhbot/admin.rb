@@ -106,8 +106,9 @@ module EleventhBot
 
       begin
         load("eleventhbot/#{name}.rb")
-      rescue LoadError => e
-        return m.reply(e.message.capitalize, true)
+      rescue Exception => e
+        m.reply(e.message.capitalize, true)
+        raise
       end
 
       if plugin = available_plugin(name)
