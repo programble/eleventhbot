@@ -50,5 +50,15 @@ module EleventhBot
         m.reply(rolls.first, true)
       end
     end
+
+    DECK = '♠♥♦♣'.chars.flat_map {|s| %w[A 2 3 4 5 6 7 8 9 10 J Q K].map {|v| s + v } }
+
+    command :draw, /draw(?: (\d+))?/,
+      'draw [num]: Draw cards from a deck'
+    def draw(m, n)
+      n = n ? n.to_i : 5
+      return if n > 52
+      m.reply(DECK.sample(n).join(' '), true)
+    end
   end
 end
