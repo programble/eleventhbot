@@ -16,7 +16,11 @@ module EleventhBot
       super
 
       ignore_hook = proc do |m|
-        !Configru.ignore.masks.any? {|mask| m.user.match(mask) }
+        if m.user
+          !Configru.ignore.masks.any? {|mask| m.user.match(mask) }
+        else
+          true
+        end
       end
 
       plugins_exec do
