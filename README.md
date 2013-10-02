@@ -53,9 +53,9 @@ plugins:
   - destiny
 ```
 
-Commands: `destiny`, `choose`
+Commands: `destiny`, `coin`, `roll`
 
-Chooses an item randomly from a list.
+Flips coins, rolls dice and chooses items randomly from lists.
 
 ### Freebase
 

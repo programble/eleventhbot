@@ -14,7 +14,7 @@ module EleventhBot
       'I choose',
       'I chose',
       'Initial thought:',
-      'My random number generator really like',
+      'My random number generator really likes',
       'PRNG says',
       'Perhaps',
       'Simon says',
@@ -28,6 +28,27 @@ module EleventhBot
     def destiny(m, choices)
       choice = (choices ? choices.split(choices[?,] || $;).map(&:strip) : %w[yes no]).sample
       m.reply("#{PHRASES.sample} #{choice}", true)
+    end
+
+    command :coin, /(?:coin|flip)+/,
+      'coin: Flip a coin'
+    def coin(m)
+      m.reply(%w[Heads Tails].sample, true)
+    end
+
+    command :roll, /(?:dice|roll)(?: (\d+)d(\d+))?/,
+      'roll [ndm]: Roll n m-sided dice'
+    match /(\d+)d(\d+)/, method: :roll
+    def roll(m, num, sides)
+      num ||= 2
+      sides ||= 6
+      return if num.to_i > 100
+      rolls = Array.new(num.to_i) { rand(1..sides.to_i) }
+      if rolls.length > 1
+        m.reply("#{rolls.join(' + ')} = #{rolls.reduce(:+)}", true)
+      else
+        m.reply(rolls.first, true)
+      end
     end
   end
 end
