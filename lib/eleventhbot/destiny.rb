@@ -40,10 +40,10 @@ module EleventhBot
       'roll [ndm]: Roll n m-sided dice'
     match /(\d+)d(\d+)/, method: :roll
     def roll(m, num, sides)
-      num ||= 2
-      sides ||= 6
-      return if num.to_i > 100
-      rolls = Array.new(num.to_i) { rand(1..sides.to_i) }
+      num = num ? num.to_i : 2
+      sides = sides ? sides.to_i : 6
+      return if num > 50 || sides > 100
+      rolls = Array.new(num) { rand(1..sides) }
       if rolls.length > 1
         m.reply("#{rolls.join(' + ')} = #{rolls.reduce(:+)}", true)
       else
