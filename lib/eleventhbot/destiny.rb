@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module EleventhBot
   class Destiny
     include Plugin, Cinch::Plugin
