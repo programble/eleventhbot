@@ -46,6 +46,21 @@ Commands: `meme`, `automeme`
 Uses the [Automeme.net](http://automeme.net) API to generate random
 memes.
 
+### Channels
+
+```yaml
+plugins:
+  - channels
+
+channels:
+  blacklist:
+    plugin: ['#example'] # Plugin will not work in #example
+  whitelist:
+    plugin: ['#example'] # Plugin will only work in #example
+```
+
+Disables plugins in certain channels.
+
 ### Destiny
 
 ```yaml
