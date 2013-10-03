@@ -29,6 +29,7 @@ module EleventhBot
     end
 
     def unregister
+      super
       plugins_exec do
         __hooks(:pre).delete(@ignore_hook)
       end
