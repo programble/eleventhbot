@@ -43,30 +43,15 @@ module EleventhBot
       @bot.part(channel, reason)
     end
 
-    def available_plugins
-      @bot.config.plugins.plugins.select {|p| p.include? Plugin }
-    end
-
-    def available_plugin(name)
-      available_plugins.find {|p| p.plugin_name == name }
-    end
-
-    def enabled_plugins
-      @bot.plugins.select {|p| p.is_a? Plugin }
-    end
-
-    def enabled_plugin(name)
-      enabled_plugins.find {|p| p.class.plugin_name == name }
-    end
-
     command :plugins, /plugins/,
-      'plugins: List loaded plugins'
-    def plugins(m)
-      plugins = available_plugins.map do |plugin|
-        if enabled_plugin(plugin.plugin_name)
-          plugin.plugin_name
+      'plugins: List loaded plugins',
+      method: :plugins_cmd
+    def plugins_cmd(m)
+      plugins = loaded_plugins.map do |loaded|
+        if plugin(loaded)
+          loaded.plugin_name
         else
-          "[#{plugin.plugin_name}]"
+          "[#{loaded.plugin_name}]"
         end
       end
       m.reply(plugins.join(' '), true)
@@ -75,7 +60,7 @@ module EleventhBot
     command :disable, /disable (\S+)/,
       'disable {plugin}: Disable a plugin'
     def disable(m, name)
-      if plugin = enabled_plugin(name)
+      if plugin = plugin(name)
         @bot.plugins.unregister_plugin(plugin)
         m.reply("#{name} disabled", true)
       else
@@ -86,8 +71,8 @@ module EleventhBot
     command :enable, /enable (\S+)/,
       'enable {plugin}: Enable a plugin'
     def enable(m, name)
-      return m.reply("#{name} is already enabled", true) if enabled_plugin(name)
-      if plugin = available_plugin(name)
+      return m.reply("#{name} is already enabled", true) if plugin(name)
+      if plugin = loaded_plugin(name)
         @bot.plugins.register_plugin(plugin)
         m.reply("#{name} enabled", true)
       else
@@ -98,7 +83,7 @@ module EleventhBot
     command :reload, /reload (\S+)/,
       'reload {plugin}: Reload a plugin'
     def reload(m, name)
-      if plugin = enabled_plugin(name)
+      if plugin = plugin(name)
         @bot.plugins.unregister_plugin(plugin)
       else
         return m.reply("#{name} is not enabled", true)
@@ -111,7 +96,7 @@ module EleventhBot
         raise
       end
 
-      if plugin = available_plugin(name)
+      if plugin = loaded_plugin(name)
         @bot.plugins.register_plugin(plugin)
         m.reply("#{name} reloaded", true)
       else

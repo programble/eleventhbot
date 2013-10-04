@@ -23,15 +23,19 @@ module EleventhBot
         end
       end
 
-      plugins_exec do
-        @ignore_hook = hook(:pre, method: ignore_hook)
+      loaded_plugins.each do |plugin|
+        plugin.instance_exec do
+          @ignore_hook = hook(:pre, method: ignore_hook)
+        end
       end
     end
 
     def unregister
       super
-      plugins_exec do
-        __hooks(:pre).delete(@ignore_hook)
+      loaded_plugins.each do |plugin|
+        plugin.instance_exec do
+          __hooks(:pre).delete(@ignore_hook)
+        end
       end
     end
   end

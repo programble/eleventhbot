@@ -7,17 +7,11 @@ module EleventhBot
       option :whitelist, Hash, {}
     end
 
-    def plugin_exec(name, &block)
-      if plugin = @bot.config.plugins.plugins.find {|p| p.plugin_name == name }
-        plugin.instance_exec(&block)
-      end
-    end
-
     def initialize(*args)
       super
 
       config.blacklist.each do |plugin, channels|
-        plugin_exec(plugin) do
+        loaded_plugin(plugin).instance_exec do
           @blacklist_hook = hook(:pre, method: proc do |m|
             !channels.include?(m.channel.name)
           end)
@@ -25,7 +19,7 @@ module EleventhBot
       end
 
       config.whitelist.each do |plugin, channels|
-        plugin_exec(plugin) do
+        loaded_plugin(plugin).instance_exec do
           @whitelist_hook = hook(:pre, method: proc do |m|
             channels.include?(m.channel.name)
           end)
@@ -35,7 +29,7 @@ module EleventhBot
 
     def unregister
       super
-      @bot.config.plugins.plugins.each do |plugin|
+      loaded_plugins.each do |plugin|
         plugin.instance_exec do
           __hooks(:pre).delete(@blacklist_hook)
           __hooks(:pre).delete(@whitelist_hook)
