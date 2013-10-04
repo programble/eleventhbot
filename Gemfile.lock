@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/programble/cinch.git
+  revision: 92cdce74c9f4eca35511dd0532e578d2e0ee0422
+  branch: hook-groups
+  specs:
+    cinch (2.0.9)
+
+GIT
   remote: https://github.com/programble/ruby-lastfm.git
   revision: 52c53741a63938e35f74098958f0679922c8a67c
   branch: lastirc
@@ -18,7 +25,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     atomic (1.1.14)
-    cinch (2.0.9)
     cinch-basic_ctcp (1.0.2)
       cinch (~> 2.0)
     cinch-identify (1.5.0)
@@ -47,7 +53,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cinch (~> 2.0.0)
+  cinch!
   cinch-basic_ctcp (~> 1.0.0)
   cinch-identify (~> 1.5.0)
   configru (~> 3.3.0)

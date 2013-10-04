@@ -6,6 +6,29 @@ module EleventhBot
       option_array :masks, String
     end
 
+    def initialize(*args)
+      super
+
+      admin_hook = proc do |m|
+        plugin(Admin).admin?(m)
+      end
+
+      loaded_plugins.each do |plugin|
+        plugin.instance_exec do
+          @admin_hook = hook(:pre, group: :admin, method: admin_hook)
+        end
+      end
+    end
+
+    def unregister
+      super
+      loaded_plugins.each do |plugin|
+        plugin.instance_exec do
+          __hooks(:pre).delete(@admin_hook)
+        end
+      end
+    end
+
     hook :pre, method: :admin?
     def admin?(m)
       admin = config.masks.any? {|mask| m.user.match(mask) }
