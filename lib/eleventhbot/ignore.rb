@@ -6,12 +6,6 @@ module EleventhBot
       option_array :masks, String
     end
 
-    def plugins_exec(&block)
-      @bot.config.plugins.plugins.each do |plugin|
-        plugin.instance_exec(&block)
-      end
-    end
-
     def initialize(*args)
       super
 
