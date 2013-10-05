@@ -34,7 +34,7 @@ module EleventhBot
     end
 
     command :ignores, /ignores/,
-      'ignores: Lists ignored masks',
+      'ignores: List ignored masks',
       group: :admin
     def ignores(m)
       m.reply(config.masks.join(', '), true)
