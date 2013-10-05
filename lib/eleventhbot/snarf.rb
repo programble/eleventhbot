@@ -1,6 +1,9 @@
 require 'cgi'
 require 'net/http'
+require 'stringio'
 require 'timeout'
+
+require 'fastimage'
 
 module EleventhBot
   class Snarf
@@ -59,10 +62,18 @@ module EleventhBot
       end
     end
 
+    def snarf_image(buffer)
+      image = FastImage.new(StringIO.new(buffer))
+      image.size.join('x') + ' ' + image.type.to_s.upcase if image.type && image.size
+    end
+
     def snarf_stream(res)
       method =
         case res['Content-type'].split(';').first
-        when 'text/html', 'application/xhtml+xml' then :snarf_html
+        when 'text/html', 'application/xhtml+xml'
+          :snarf_html
+        when %r"^image/"
+          :snarf_image
         else
           warn "cannot snarf #{res['Content-type']}"
           return

@@ -14,3 +14,6 @@ gem 'ffi-aspell', '~> 0.0.3'
 # Lastfm
 gem 'lastfm', :git => 'https://github.com/programble/ruby-lastfm.git', :branch => 'lastirc'
 gem 'time-lord', '~> 1.0.0'
+
+# Snarf
+gem 'fastimage', '~> 1.5.0'
