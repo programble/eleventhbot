@@ -59,7 +59,7 @@ module EleventhBot
       return snarfed
     end
 
-    match /(https?:\/\/\S+)/, use_prefix: false, use_suffix: false, method: :snarf
+    match /(https?:\/\/[^ >]+)/, use_prefix: false, use_suffix: false, method: :snarf
     def snarf(m, uri)
       uri = URI(uri)
       Timeout.timeout(config.limits.timeout) do
