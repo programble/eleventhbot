@@ -65,7 +65,9 @@ module EleventhBot
       Timeout.timeout(config.limits.timeout) do
         config.limits.redirects.times do
           Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
-            req = Net::HTTP::Get.new(uri)
+            #req = Net::HTTP::Get.new(uri) # Ruby 2.0
+            req = Net::HTTP::Get.new(uri.request_uri)
+            req['Host'] = uri.host
             req['User-agent'] = config.useragent
 
             http.request(req) do |res|
