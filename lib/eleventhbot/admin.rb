@@ -133,7 +133,11 @@ module EleventhBot
       method: :eval_cmd
     def eval_cmd(m, code)
       return m.reply('nil', true) unless config.eval
-      m.reply(eval(code).inspect, true)
+      begin
+        m.reply(eval(code).inspect, true)
+      rescue => e
+        m.reply(e.inspect, true)
+      end
     end
   end
 end
