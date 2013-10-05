@@ -60,6 +60,9 @@ channels:
     plugin: ['#example'] # Plugin will only work in #example
 ```
 
+Admin commands: `blacklists`, `whitelists`, `blacklist`, `whitelist`,
+`unblacklist`, `unwhitelist`
+
 Disables plugins in certain channels.
 
 ### Destiny
