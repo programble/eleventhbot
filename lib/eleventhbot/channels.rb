@@ -12,7 +12,7 @@ module EleventhBot
 
       blacklist_hook = proc do |m|
         if blacklist = plugin(Channels).config.blacklist[self.class.plugin_name]
-          !blacklist.include?(m.channel.name)
+          blacklist.empty? || !blacklist.include?(m.channel.name)
         else
           true
         end
@@ -20,7 +20,7 @@ module EleventhBot
 
       whitelist_hook = proc do |m|
         if whitelist = plugin(Channels).config.whitelist[self.class.plugin_name]
-          whitelist.include?(m.channel.name)
+          whitelist.empty? || whitelist.include?(m.channel.name)
         else
           true
         end
@@ -44,13 +44,56 @@ module EleventhBot
       end
     end
 
+    command :blacklists, /blacklists (\S+)/,
+      'blacklists {plugin}: List channels plugin is blacklisted in',
+      group: :admin
+    def blacklists(m, plugin)
+      if config.blacklist.include? plugin
+        m.reply("#{plugin} is blacklisted in #{config.blacklist[plugin].join(', ')}", true)
+      else
+        m.reply("#{plugin} is not blacklisted", true)
+      end
+    end
+
+    command :whitelists, /whitelists (\S+)/,
+      'whitelists {plugin}: List channels plugin is whitelisted in',
+      group: :admin
+    def whitelists(m, plugin)
+      if config.whitelist.include? plugin
+        m.reply("#{plugin} is whitelisted in #{config.whitelist[plugin].join(', ')}", true)
+      else
+        m.reply("#{plugin} is not whitelisted", true)
+      end
+    end
+
     command :blacklist, /blacklist (\S+)(?: (\S+))?/,
       'blacklist {plugin} [channel]: Blacklist a plugin from being used in a channel',
       group: :admin
     def blacklist(m, plugin, channel)
       return m.reply("#{plugin} does not exist", true) unless loaded_plugin(plugin)
-      (config.blacklist[plugin] ||= Array.new) << (channel || m.channel.name)
-      m.reply("#{plugin} blacklisted", true)
+      channel ||= m.channel.name
+      config.blacklist[plugin] ||= Array.new
+      if config.blacklist[plugin].include? channel
+        m.reply("#{plugin} is already blacklisted", true)
+      else
+        config.blacklist[plugin] << channel
+        m.reply("#{plugin} blacklisted", true)
+      end
+    end
+
+    command :whitelist, /whitelist (\S+)(?: (\S+))?/,
+      'whitelist {plugin} [channel]: Whitelist a plugin to only be used in a channel',
+      group: :admin
+    def whitelist(m, plugin, channel)
+      return m.reply("#{plugin} does not exist", true) unless loaded_plugin(plugin)
+      channel ||= m.channel.name
+      config.whitelist[plugin] ||= Array.new
+      if config.whitelist[plugin].include? channel
+        m.reply("#{plugin} is already whitelisted", true)
+      else
+        config.whitelist[plugin] << channel
+        m.reply("#{plugin} whitelisted", true)
+      end
     end
 
     command :unblacklist, /unblacklist (\S+)(?: (\S+))?/,
@@ -65,15 +108,6 @@ module EleventhBot
       end
     end
 
-    command :whitelist, /whitelist (\S+)(?: (\S+))?/,
-      'whitelist {plugin} [channel]: Whitelist a plugin to only be used in a channel',
-      group: :admin
-    def whitelist(m, plugin, channel)
-      return m.reply("#{plugin} does not exist", true) unless loaded_plugin(plugin)
-      (config.whitelist[plugin] ||= Array.new) << (channel || m.channel.name)
-      m.reply("#{plugin} whitelisted", true)
-    end
- 
     command :unwhitelist, /unwhitelist (\S+)(?: (\S+))?/,
       'unwhitelist {plugin} [channel]: Unwhitelist a plugin from only being used in a channel',
       group: :admin
