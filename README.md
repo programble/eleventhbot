@@ -111,6 +111,8 @@ ignore:
     - '*!*example@example.com'
 ```
 
+Admin commands: `ignore`, `unignore`
+
 Prevents users matching masks from using commands.
 
 ### Karma
