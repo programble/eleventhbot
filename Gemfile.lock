@@ -1,7 +1,6 @@
 GIT
-  remote: https://github.com/programble/cinch.git
-  revision: 92cdce74c9f4eca35511dd0532e578d2e0ee0422
-  branch: hook-groups
+  remote: https://github.com/cinchrb/cinch.git
+  revision: 9a2b3062f03fc839f8a488e9c9928bf4da9594ed
   specs:
     cinch (2.0.9)
 
