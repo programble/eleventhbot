@@ -16,7 +16,7 @@ module EleventhBot
 
       option_group :http do
         option_group :limits do
-          option :redirects, Fixnum, 10
+          option :redirects, Fixnum, 5
           option :stream, Fixnum, 512
         end
 
