@@ -7,7 +7,7 @@ module EleventhBot
     include Plugin, Cinch::Plugin
 
     configru do
-      option :timeout, Fixnum, 10
+      option :timeout, Fixnum, 5
 
       option_group :cache do
         option :limit, Fixnum, 50
