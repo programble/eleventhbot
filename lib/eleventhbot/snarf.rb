@@ -76,7 +76,7 @@ module EleventhBot
             buffer << chunk
             if snarfed = send(method, buffer)
               throw :halt
-            elsif buffer.length > config.limits.stream * 1000
+            elsif buffer.length > config.http.limits.stream * 1000
               warn 'stream limit'
               throw :halt
             end
