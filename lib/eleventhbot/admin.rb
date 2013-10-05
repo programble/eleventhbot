@@ -4,6 +4,7 @@ module EleventhBot
 
     configru do
       option_array :masks, String
+      option_bool :eval, false
     end
 
     def initialize(*args)
@@ -125,6 +126,14 @@ module EleventhBot
       else
         m.reply("#{name} does not exist", true)
       end
+    end
+
+    command :eval, /eval (.+)/,
+      'eval {expression}: Evaluate a Ruby expression',
+      method: :eval_cmd
+    def eval_cmd(m, code)
+      return m.reply('nil', true) unless config.eval
+      m.reply(eval(code).inspect, true)
     end
   end
 end

@@ -27,6 +27,7 @@ plugins:
 admin:
   masks:
     - '*!*example@example.com'
+  eval: false # Enable the eval command. Do not enable this. Just don't.
 ```
 
 Commands: `say`, `action`, `nick`, `join`, `part`, `plugins`, `enable`,
