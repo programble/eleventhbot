@@ -111,7 +111,7 @@ ignore:
     - '*!*example@example.com'
 ```
 
-Admin commands: `ignore`, `unignore`
+Admin commands: `ignores`, `ignore`, `unignore`
 
 Prevents users matching masks from using commands.
 
