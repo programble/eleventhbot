@@ -39,7 +39,7 @@ module EleventhBot
       def fetch(key, &block)
         @lru.delete(key)
         @lru.unshift(key)
-        delete(@lru.pop) if @lru.length > @limit
+        @lru.pop.tap {|x| delete(x) && @times.delete(x) } if @lru.length > @limit
 
         delete(key) if include?(key) && Time.now - @times[key] >= @ttl
         @times[key] = Time.now unless include?(key)
