@@ -20,3 +20,8 @@ group :snarf do
   gem 'fastimage', '~> 1.5.0'
   gem 'twitter', '5.0.0.rc.1'
 end
+
+group :fedora do
+  gem 'nokogiri', '~> 1.6.0'
+  gem 'pkgwat', '~> 0.1.4'
+end
