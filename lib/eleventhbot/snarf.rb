@@ -1,5 +1,6 @@
 require 'cgi'
 require 'net/http'
+require 'open-uri'
 require 'stringio'
 require 'timeout'
 
@@ -67,6 +68,12 @@ module EleventhBot
       end
     end
 
+    def dagd(uri)
+      open("http://da.gd/s?url=#{URI.escape(uri.to_s)}&strip=1", 'r', &:read)
+    rescue OpenURI::HTTPError => e
+      e.to_s
+    end
+
     def snarf_html(buffer)
       if match = /<title>(.+)<\/title>/i.match(buffer)
         '"' + CGI.unescape_html(match[1].gsub(/\s+/, ' ')) + '"'
@@ -123,18 +130,19 @@ module EleventhBot
         req['Host'] = uri.host # Ruby 2.0 does this for us
         req['User-agent'] = config.http.useragent
 
-        snarfed = nil
         http.request(req) do |res|
           if res.is_a? Net::HTTPRedirection
-            return snarfed = snarf_http(URI(res['Location']), depth + 1)
+            return snarf_http(URI(res['Location']), depth + 1)
           elsif res.is_a? Net::HTTPSuccess
-            return snarfed = snarf_stream(res)
+            if snarfed = snarf_stream(res)
+              return snarfed += " <#{dagd(uri)}>"
+            end
           else
             warn res.inspect
-            return
           end
         end
       end
+      return
     end
 
     def snarf_tweet(uri)
