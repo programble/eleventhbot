@@ -23,6 +23,7 @@ plugins:
   - ignore
   - karma
   - lastfm
+  - network
   - sed
   - snarf
   - spell
