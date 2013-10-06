@@ -25,3 +25,7 @@ group :fedora do
   gem 'nokogiri', '~> 1.6.0'
   gem 'pkgwat', '~> 0.1.4'
 end
+
+group :network do
+  gem 'ipaddress', '~> 0.8.0'
+end
