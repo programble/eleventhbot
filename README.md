@@ -76,6 +76,17 @@ Commands: `destiny`, `coin`, `roll`, `draw`
 
 Flips coins, rolls dice, draws cards and chooses items randomly from lists.
 
+### Fedora
+
+```yaml
+plugins:
+  - fedora
+```
+
+Commands: `pkgwat`
+
+Provides information about Fedora. e.g., package versions against releases.
+
 ### Freebase
 
 ```yaml
