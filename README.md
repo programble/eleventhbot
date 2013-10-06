@@ -194,6 +194,17 @@ Fetches information from [Last.fm](http://www.last.fm). A Last.fm API
 account is required, and can be created
 [here](http://www.last.fm/api/account/create).
 
+### Network
+
+```yaml
+plugins:
+  - network
+```
+
+Commands: `host`
+
+Provides information about network-related things. e.g., DNS lookups.
+
 ### Sed
 
 ```yaml
