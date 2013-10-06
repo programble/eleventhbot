@@ -4,6 +4,7 @@ require 'stringio'
 require 'timeout'
 
 require 'fastimage'
+require 'twitter'
 
 module EleventhBot
   class Snarf
@@ -24,6 +25,11 @@ module EleventhBot
         end
 
         option :useragent, String, 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'
+      end
+
+      option_group :twitter do
+        option :key, String, ''
+        option :secret, String, ''
       end
     end
 
@@ -53,11 +59,16 @@ module EleventhBot
     def initialize(*args)
       super
       @cache = LRUTTLHash.new(config.cache.limit, config.cache.ttl)
+      if !config.twitter['key'].empty?
+        @twitter = Twitter::REST::Client.new do |c|
+          c.consumer_key = config.twitter['key']
+          c.consumer_secret = config.twitter['secret']
+        end
+      end
     end
 
-    TITLE_REGEXP = /<title>(.+)<\/title>/i
     def snarf_html(buffer)
-      if match = TITLE_REGEXP.match(buffer)
+      if match = /<title>(.+)<\/title>/i.match(buffer)
         '"' + CGI.unescape_html(match[1].gsub(/\s+/, ' ')) + '"'
       end
     end
@@ -126,13 +137,30 @@ module EleventhBot
       end
     end
 
+    def snarf_tweet(uri)
+      return unless @twitter
+      if uri.host == 'twitter.com' && match = %r"/status/(\d+)".match(uri.request_uri)
+        tweet = @twitter.status(match[1].to_i)
+        s = String.new
+        favrt = Array.new
+        favrt << "#{tweet.favorite_count} fav" unless tweet.favorite_count.zero?
+        favrt << "#{tweet.retweet_count} rt" unless tweet.retweet_count.zero?
+        s << '(' << favrt.join(' ') << ') ' unless favrt.empty?
+        s << '@' << tweet.user.screen_name << ': '
+        s << CGI.unescapeHTML(tweet.text)
+      end
+    rescue Twitter::Error => e
+      warn e.inspect
+      return
+    end
+
     match /(https?:\/\/[^ >]+)/, use_prefix: false, use_suffix: false, method: :snarf
     def snarf(m, uri)
       uri = URI(uri)
       snarfed = @cache.fetch(uri) do
         begin
           Timeout.timeout(config.timeout) do
-            snarf_http(uri)
+            snarf_tweet(uri) || snarf_http(uri)
           end
         rescue Timeout::Error
           warn 'timeout'

@@ -17,3 +17,4 @@ gem 'time-lord', '~> 1.0.0'
 
 # Snarf
 gem 'fastimage', '~> 1.5.0'
+gem 'twitter', '5.0.0.rc.1'
