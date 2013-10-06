@@ -26,7 +26,6 @@ module EleventhBot
     def pkgwat(m, pkg)
       v = get_version(pkg)
       m.reply v.map { |f| "#{2.chr}#{f['release']}#{2.chr}: s: #{f['stable_version']}, t: #{f['testing_version']}" }.join(', ')
-
     end
 
     command :pkgwat, /pkgwat (.+)/,
