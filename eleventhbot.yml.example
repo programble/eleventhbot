@@ -23,6 +23,7 @@ plugins:
   - karma
   - lastfm
   - sed
+  - snarf
   - spell
 
 acronym:
@@ -57,6 +58,20 @@ lastfm:
 
 sed:
   memory: 5
+
+snarf:
+  timeout: 5 # seconds
+  cache:
+    limit: 50
+    ttl: 3600 # seconds
+  http:
+    limits:
+      redirects: 5
+      stream: 512 # kilobytes
+    useragent: 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'
+  twitter: # Optional
+    key: 000000000000000000000
+    secret: 0000000000000000000000000000000000000000000
 
 spell:
   checker: hunspell # hunspell or aspell

@@ -166,6 +166,32 @@ sed:
 Provides sed-like modification of previous lines using `s/ma/re/`
 syntax.
 
+### Snarf
+
+```yaml
+plugins:
+  - snarf
+
+snarf:
+  timeout: 5 # seconds
+  cache:
+    limit: 50
+    ttl: 3600 # seconds
+  http:
+    limits:
+      redirects: 5
+      stream: 512 # kilobytes
+    useragent: 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'
+  twitter: # Optional
+    key: 000000000000000000000
+    secret: 0000000000000000000000000000000000000000000
+```
+
+Retrieves titles for HTML links, reports dimensions of links to images,
+and optionally retrieves tweet information and text for Twitter status
+links. A Twitter API key can be obtained from [Twitter
+Developers](https://dev.twitter.com/apps/new).
+
 ### Spell
 
 ```yaml
