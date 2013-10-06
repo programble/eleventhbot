@@ -17,6 +17,7 @@ plugins:
   - automeme
   - channels
   - destiny
+  - fedora
   - freebase
   - help
   - ignore
