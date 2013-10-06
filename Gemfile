@@ -12,7 +12,7 @@ gem 'ffi-hunspell', '~> 0.3.0'
 gem 'ffi-aspell', '~> 0.0.3'
 
 # Lastfm
-gem 'lastfm', :git => 'https://github.com/programble/ruby-lastfm.git', :branch => 'lastirc'
+gem 'lastfm', '~> 1.21.0'
 gem 'time-lord', '~> 1.0.0'
 
 # Snarf
