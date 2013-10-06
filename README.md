@@ -2,6 +2,36 @@
 
 The real bot. The best bot.
 
+## Setup
+
+First, fetch the dependencies:
+
+```sh
+bundle install
+```
+
+You can use Bundler's `--without` option to leave out dependencies of
+plugins you don't plan to use:
+
+```sh
+bundle install --without lastfm
+```
+
+Next, create a configuration file and edit accordingly.
+
+```sh
+cp eleventhbot.yml.example eleventhbot.yml
+```
+
+Details on available plugins and their configurations can be found in
+the section below.
+
+Now that EleventhBot is configured, run it:
+
+```sh
+bundle exec bin/eleventhbot
+```
+
 ## Plugins
 
 ### Acronym
