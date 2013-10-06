@@ -147,7 +147,7 @@ module EleventhBot
         favrt << "#{tweet.retweet_count} rt" unless tweet.retweet_count.zero?
         s << '(' << favrt.join(' ') << ') ' unless favrt.empty?
         s << '@' << tweet.user.screen_name << ': '
-        s << CGI.unescapeHTML(tweet.text)
+        s << CGI.unescapeHTML(tweet.text).gsub("\n", ' ')
       end
     rescue Twitter::Error => e
       warn e.inspect
