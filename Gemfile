@@ -7,9 +7,9 @@ gem 'configru', '~> 3.3.0'
 
 gem 'time-lord', '~> 1.0.0', group: [:lastfm, :github]
 
-group :spell do
-  gem 'ffi-aspell', '~> 0.0.3'
-  gem 'ffi-hunspell', '~> 0.3.0'
+group :fedora do
+  gem 'nokogiri', '~> 1.6.0'
+  gem 'pkgwat', '~> 0.1.4'
 end
 
 group :lastfm do
@@ -22,9 +22,9 @@ group :snarf do
   gem 'twitter', '5.0.0.rc.1'
 end
 
-group :fedora do
-  gem 'nokogiri', '~> 1.6.0'
-  gem 'pkgwat', '~> 0.1.4'
+group :spell do
+  gem 'ffi-aspell', '~> 0.0.3'
+  gem 'ffi-hunspell', '~> 0.3.0'
 end
 
 group :unicode do
