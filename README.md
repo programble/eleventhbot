@@ -241,6 +241,7 @@ snarf:
     limits:
       redirects: 5
       stream: 512 # kilobytes
+      title: 250 # characters
     useragent: 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'
   twitter: # Optional
     key: 000000000000000000000

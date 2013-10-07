@@ -18,6 +18,7 @@ module EleventhBot
         option_group :limits do
           option :redirects, Fixnum, 5
           option :stream, Fixnum, 512
+          option :title, Fixnum, 250
         end
 
         option :useragent, String, 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'
@@ -47,7 +48,12 @@ module EleventhBot
 
     def snarf_html(buffer)
       if match = /<title>(.+)<\/title>/mi.match(buffer)
-        '"' + CGI.unescape_html(match[1].gsub(/\s+/, ' ').strip) + '"'
+        title = CGI.unescape_html(match[1].gsub(/\s+/, ' ')).strip
+        s = String.new
+        s << '"'
+        s << title[0, config.http.limits.title]
+        s << '...' if title.length > config.http.limits.title
+        s << '"'
       end
     end
 
