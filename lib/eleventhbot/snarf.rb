@@ -22,6 +22,8 @@ module EleventhBot
         end
 
         option :useragent, String, 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'
+
+        option :shorten, Fixnum, 30
       end
 
       option_group :twitter do
@@ -112,7 +114,8 @@ module EleventhBot
             return snarf_http(URI(res['Location']), depth + 1)
           elsif res.is_a? Net::HTTPSuccess
             if snarfed = snarf_stream(res)
-              return snarfed += " <#{dagd(uri)}>"
+              snarfed += " <#{dagd(uri)}>" if uri.to_s.length > config.http.shorten
+              return snarfed
             end
           else
             warn res.inspect
