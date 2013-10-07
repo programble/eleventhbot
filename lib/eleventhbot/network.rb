@@ -18,5 +18,33 @@ module EleventhBot
         m.reply(Resolv.getaddresses(name).join(', '), true)
       end
     end
+
+    command :dns, /dns (\S+)(?: (\S+))?/,
+      'dns {name} [typeclass]: Look up typeclass DNS resources of name'
+    def dns(m, name, typeclass)
+      typeclass = typeclass ? typeclass.upcase : 'ANY'
+      return unless Resolv::DNS::Resource::IN.const_defined? typeclass
+      typeclass = Resolv::DNS::Resource::IN.const_get(typeclass)
+
+      Resolv::DNS.open do |dns|
+        resources = dns.getresources(name, typeclass).map do |res|
+          s = [res.ttl, 'IN', res.class.name.split(':').last]
+          case res
+          when Resolv::DNS::Resource::IN::A, Resolv::DNS::Resource::IN::AAAA
+            s << res.address
+          when Resolv::DNS::Resource::IN::CNAME, Resolv::DNS::Resource::IN::NS
+            s << res.name
+          when Resolv::DNS::Resource::IN::MX
+            s << res.preference << res.exchange
+          when Resolv::DNS::Resource::IN::TXT
+            s.concat(res.strings)
+          else
+            next
+          end
+          s.join(' ')
+        end
+        m.reply(resources.compact[0..14].join(', '), true)
+      end
+    end
   end
 end

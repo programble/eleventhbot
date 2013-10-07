@@ -212,7 +212,7 @@ plugins:
   - network
 ```
 
-Commands: `host`
+Commands: `host`, `dns`
 
 Provides information about network-related things. e.g., DNS lookups.
 
