@@ -25,7 +25,7 @@ module EleventhBot
     def charinfo(m, c)
       cp = UnicodeUtils::Codepoint.new(c.codepoints.first)
       utf8 = cp.hexbytes.delete(",").upcase
-      m.reply "#{cp.uplus} utf8:#{utf8} \"#{cp}\" #{cp.name}", true
+      m.reply "#{cp.uplus} UTF-8:#{utf8} \"#{cp}\" #{cp.name}", true
     end
 
     command :findchar, /findchar (.+)/,
