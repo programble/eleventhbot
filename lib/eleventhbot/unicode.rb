@@ -5,13 +5,24 @@ module EleventhBot
     include Plugin, Cinch::Plugin
 
     configru do
-      option :find_limit, Fixnum, 10
+      option :charname_limit, Fixnum, 5
+      option :findchar_limit, Fixnum, 5
     end
 
-    command :charname, /charname (.)/,
-      'charname [unicode character]: Get unicode name for the character'
-    def charname(m, c)
-      m.reply UnicodeUtils.sid(c).downcase, true
+    command :charname, /charname (.+)/,
+      'charname [unicode characters]: Get unicode names for the characters'
+    def charname(m, chars)
+      names = chars.chars.take(config.charname_limit).map do |c|
+        UnicodeUtils.sid(c).downcase
+      end
+
+      output = names.join(', ')
+
+      if chars.length > config.charname_limit
+        output << " (limited to #{config.charname_limit} chars)"
+      end
+
+      m.reply output, true
     end
 
     command :chartype, /chartype (.)/,
@@ -40,15 +51,15 @@ module EleventhBot
 
       len = codepoints.length
 
-      descriptions = codepoints.take(config.find_limit).map do |cp|
+      descriptions = codepoints.take(config.findchar_limit).map do |cp|
         cp = UnicodeUtils::Codepoint.new(cp)
         "#{cp} (#{cp.name.downcase})"
       end
 
       output = descriptions.join(' ')
 
-      if len > config.find_limit
-        output << " ... #{len - config.find_limit} more not shown."
+      if len > config.findchar_limit
+        output << " ... #{len - config.findchar_limit} more not shown."
       end
 
       if len > 0
