@@ -14,11 +14,6 @@ module EleventhBot
     configru do
       option :timeout, Fixnum, 5
 
-      option_group :cache do
-        option :limit, Fixnum, 50
-        option :ttl, Fixnum, 3600
-      end
-
       option_group :http do
         option_group :limits do
           option :redirects, Fixnum, 5
@@ -34,32 +29,8 @@ module EleventhBot
       end
     end
 
-    class LRUTTLHash < Hash
-      def initialize(limit, ttl)
-        super()
-        @limit = limit
-        @ttl = ttl
-        @times = Hash.new
-        @lru = Array.new
-      end
-
-      def fetch(key, &block)
-        @lru.delete(key)
-        @lru.unshift(key)
-        @lru.pop.tap {|x| delete(x) && @times.delete(x) } if @lru.length > @limit
-
-        delete(key) if include?(key) && Time.now - @times[key] >= @ttl
-        @times[key] = Time.now unless include?(key)
-
-        value = super
-        store(key, value)
-        value
-      end
-    end
-
     def initialize(*args)
       super
-      @cache = LRUTTLHash.new(config.cache.limit, config.cache.ttl)
       if !config.twitter['key'].empty?
         @twitter = Twitter::REST::Client.new do |c|
           c.consumer_key = config.twitter['key']
@@ -165,17 +136,13 @@ module EleventhBot
     match /(https?:\/\/[^ >]+)/, use_prefix: false, use_suffix: false, method: :snarf
     def snarf(m, uri)
       uri = URI(uri)
-      snarfed = @cache.fetch(uri) do
-        begin
-          Timeout.timeout(config.timeout) do
-            snarf_tweet(uri) || snarf_http(uri)
-          end
-        rescue Timeout::Error
-          warn 'timeout'
-          nil
+      begin
+        Timeout.timeout(config.timeout) do
+          m.reply(snarf_tweet(uri) || snarf_http(uri))
         end
+      rescue Timeout::Error
+        warn 'timeout'
       end
-      m.reply(snarfed)
     end
   end
 end

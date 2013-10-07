@@ -237,9 +237,6 @@ plugins:
 
 snarf:
   timeout: 5 # seconds
-  cache:
-    limit: 50
-    ttl: 3600 # seconds
   http:
     limits:
       redirects: 5
