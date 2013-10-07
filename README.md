@@ -133,6 +133,17 @@ Retrieves information from Freebase. An API key is optional and can be
 obtained from [Google APIs
 Console](https://code.google.com/apis/console).
 
+### Github
+
+```yaml
+plugins:
+  - github
+```
+
+Commands: `ghstatus`
+
+Gets Github Status information.
+
 ### Help
 
 ```yaml
