@@ -29,7 +29,7 @@ the section below.
 Now that EleventhBot is configured, run it.
 
 ```sh
-bundle exec bin/eleventhbot
+bin/eleventhbot
 ```
 
 ## Plugins

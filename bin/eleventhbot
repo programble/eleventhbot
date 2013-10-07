@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'bundler/setup'
 
 require 'configru'
 require 'cinch'
 require 'cinch/plugins/basic_ctcp'
 require 'cinch/plugins/identify'
 
+$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'eleventhbot'
 
 2.times do
