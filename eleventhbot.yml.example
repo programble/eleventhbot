@@ -28,6 +28,7 @@ plugins:
   - sed
   - snarf
   - spell
+  - unicode
 
 acronym:
   words: /usr/share/dict/words
@@ -78,3 +79,7 @@ snarf:
 spell:
   checker: hunspell # hunspell or aspell
   language: en_US
+
+unicode:
+  - charname_limit: 5
+  - findchar_limit: 5

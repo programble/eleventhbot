@@ -271,6 +271,22 @@ Uses [Hunspell](http://hunspell.sourceforge.net) or
 [Aspell](http://aspell.net) to correct spelling. The selected checker
 and dictionary must be installed.
 
+### Unicode
+
+```yaml
+plugins:
+  - unicode
+
+unicode:
+  - charname_limit: 5
+  - findchar_limit: 5
+```
+
+Commands: `charname`, `charinfo`, `chartype`, `findchar`
+
+Provides unicode character information and allows searching for characters by
+name.
+
 ## License
 
 Copyright © 2013, Curtis McEnroe <programble@gmail.com>

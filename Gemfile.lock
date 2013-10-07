@@ -70,6 +70,7 @@ GEM
       json (~> 1.8)
       simple_oauth (~> 0.2.0)
     tzinfo (0.3.37)
+    unicode_utils (1.4.0)
     xml-simple (1.1.2)
 
 PLATFORMS
@@ -89,3 +90,4 @@ DEPENDENCIES
   promise (~> 0.2.0)
   time-lord (~> 1.0.0)
   twitter (= 5.0.0.rc.1)
+  unicode_utils (~> 1.4.0)

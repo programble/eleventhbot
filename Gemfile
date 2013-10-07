@@ -26,3 +26,7 @@ group :fedora do
   gem 'nokogiri', '~> 1.6.0'
   gem 'pkgwat', '~> 0.1.4'
 end
+
+group :unicode do
+  gem 'unicode_utils', '~> 1.4.0'
+end
