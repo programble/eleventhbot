@@ -6,8 +6,8 @@ irc:
   prefix: '!'
   channels:
     - '#example'
-  nickserv: password
-  sasl:
+  nickserv: password # Optional
+  sasl: # Optional
     username: username
     password: password
 
@@ -19,6 +19,7 @@ plugins:
   - destiny
   - fedora
   - freebase
+  - github
   - help
   - ignore
   - karma
