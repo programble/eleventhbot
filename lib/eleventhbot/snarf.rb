@@ -75,7 +75,7 @@ module EleventhBot
     end
 
     def snarf_html(buffer)
-      if match = /<title>(.+)<\/title>/i.match(buffer)
+      if match = /<title>(.+)<\/title>/mi.match(buffer)
         '"' + CGI.unescape_html(match[1].gsub(/\s+/, ' ')) + '"'
       end
     end
