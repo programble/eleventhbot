@@ -10,7 +10,7 @@ module EleventhBot
 
     def initialize(*args)
       super
-      @words = File.readlines(config.words).map(&:strip).group_by {|s| s.chr.downcase }
+      @words = File.readlines(config.words).map(&:strip).group_by {|s| s.chr }
     end
 
     command :acronym, /(?:acronym ([a-zA-Z]+)|([A-Z]+))/,
