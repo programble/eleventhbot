@@ -23,7 +23,7 @@ module EleventhBot
 
         option :useragent, String, 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'
 
-        option :shorten, Fixnum, 30
+        option :shorten, Fixnum, 35
       end
 
       option_group :twitter do

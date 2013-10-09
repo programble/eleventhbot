@@ -243,7 +243,7 @@ snarf:
       stream: 512 # kilobytes
       title: 250 # characters
     useragent: 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0'
-    shorten: 30 # URI length to shorten
+    shorten: 35 # URI length to shorten
   twitter: # Optional
     key: 000000000000000000000
     secret: 0000000000000000000000000000000000000000000
@@ -270,22 +270,6 @@ Commands: `spell`
 Uses [Hunspell](http://hunspell.sourceforge.net) or
 [Aspell](http://aspell.net) to correct spelling. The selected checker
 and dictionary must be installed.
-
-### Unicode
-
-```yaml
-plugins:
-  - unicode
-
-unicode:
-  - charname_limit: 5
-  - findchar_limit: 5
-```
-
-Commands: `charname`, `charinfo`, `chartype`, `findchar`
-
-Provides unicode character information and allows searching for characters by
-name.
 
 ## License
 
