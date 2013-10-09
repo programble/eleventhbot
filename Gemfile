@@ -19,6 +19,7 @@ end
 
 group :snarf do
   gem 'fastimage', '~> 1.5.0'
+  gem 'htmlentities', '~> 4.3.0'
   gem 'twitter', '5.0.0.rc.1'
 end
 

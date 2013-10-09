@@ -28,6 +28,7 @@ GEM
       ffi (>= 1.0.11)
     ffi-hunspell (0.3.0)
       ffi (~> 1.0)
+    htmlentities (4.3.1)
     http (0.5.0)
       http_parser.rb
     http_parser.rb (0.5.3)
@@ -84,6 +85,7 @@ DEPENDENCIES
   fastimage (~> 1.5.0)
   ffi-aspell (~> 0.0.3)
   ffi-hunspell (~> 0.3.0)
+  htmlentities (~> 4.3.0)
   lastfm (~> 1.21.0)
   nokogiri (~> 1.6.0)
   pkgwat (~> 0.1.4)

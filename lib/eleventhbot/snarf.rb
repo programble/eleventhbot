@@ -5,6 +5,7 @@ require 'stringio'
 require 'timeout'
 
 require 'fastimage'
+require 'htmlentities'
 require 'twitter'
 
 module EleventhBot
@@ -50,7 +51,7 @@ module EleventhBot
 
     def snarf_html(buffer)
       if match = /<title>(.+)<\/title>/mi.match(buffer)
-        title = CGI.unescape_html(match[1].gsub(/\s+/, ' ')).strip
+        title = HTMLEntities.new.decode(match[1].gsub(/\s+/, ' ')).strip
         s = String.new
         s << '"'
         s << title[0, config.http.limits.title]
