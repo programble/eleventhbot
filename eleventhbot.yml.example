@@ -25,6 +25,7 @@ plugins:
   - karma
   - lastfm
   - network
+  - ratelimit
   - sed
   - snarf
   - spell
@@ -58,6 +59,11 @@ lastfm:
   secret: 00000000000000000000000000000000 # Required
   pstore: lastfm.pstore
   chart: lastfm.chart
+
+ratelimit:
+  rate: 5
+  time: 1 # seconds
+  cooldown: 5 #seconds
 
 sed:
   memory: 5

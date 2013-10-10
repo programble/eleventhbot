@@ -216,6 +216,20 @@ Commands: `host`, `dns`
 
 Provides information about network-related things. e.g., DNS lookups.
 
+### Rate Limit
+
+```yaml
+plugins:
+  - ratelimit
+
+ratelimit:
+  rate: 5
+  time: 1 # seconds
+  cooldown: 5
+```
+
+Limits the number of commands that can be run in a period of time.
+
 ### Sed
 
 ```yaml
