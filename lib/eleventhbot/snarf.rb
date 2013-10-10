@@ -98,7 +98,7 @@ module EleventhBot
       snarfed
     end
 
-    def snarf_http(uri, depth = 0)
+    def snarf_http(uri, depth = 0, from = uri)
       if depth > config.http.limits.redirects
         warn 'redirect limit'
         return
@@ -112,10 +112,10 @@ module EleventhBot
 
         http.request(req) do |res|
           if res.is_a? Net::HTTPRedirection
-            return snarf_http(URI(res['Location']), depth + 1)
+            return snarf_http(URI(res['Location']), depth + 1, from)
           elsif res.is_a? Net::HTTPSuccess
             if snarfed = snarf_stream(res)
-              snarfed += " <#{dagd(uri)}>" if uri.to_s.length > config.http.shorten
+              snarfed += " <#{dagd(from)}>" if from.to_s.length > config.http.shorten
               return snarfed
             end
           else
