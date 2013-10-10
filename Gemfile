@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'cinch', :git => 'https://github.com/cinchrb/cinch.git'
 gem 'cinch-basic_ctcp', '~> 1.0.0'
 gem 'cinch-identify', '~> 1.5.0'
-gem 'configru', '~> 3.3.0'
+gem 'configru', '~> 3.4.0'
 
 gem 'time-lord', '~> 1.0.0', group: [:lastfm, :github]
 

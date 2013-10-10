@@ -10,38 +10,37 @@ require 'cinch/plugins/identify'
 $LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'eleventhbot'
 
-2.times do
-  Configru.load('eleventhbot.yml') do
-    option_group :irc do
-      option_required :server, String
-      option :port, Fixnum, 6667
-      option_bool :ssl, false
+Configru.load('eleventhbot.yml') do
+  option_group :irc do
+    option_required :server, String
+    option :port, Fixnum, 6667
+    option_bool :ssl, false
 
-      option :nick, String, 'bot11'
-      option :prefix, String, '!'
+    option :nick, String, 'bot11'
+    option :prefix, String, '!'
 
-      option_array :channels, String
+    option_array :channels, String
 
-      option :nickserv, String, ''
+    option :nickserv, String, ''
 
-      option_group :sasl do
-        option :username, String, ''
-        option :password, String, ''
-      end
-    end
-
-    option_array :plugins, String
-
-    EleventhBot::Plugin.list.each do |plugin|
-      next unless plugin.configru_block
-      option_group plugin.plugin_name do
-        instance_eval &plugin.configru_block
-      end
+    option_group :sasl do
+      option :username, String, ''
+      option :password, String, ''
     end
   end
 
-  Configru.plugins.map {|r| require("eleventhbot/#{r}") }
+  option_array :plugins, String
+
+  EleventhBot::Plugin.list.each do |plugin|
+    next unless plugin.configru_block
+    option_group plugin.plugin_name do
+      instance_eval &plugin.configru_block
+    end
+  end
 end
+
+Configru.plugins.map {|r| require("eleventhbot/#{r}") }
+Configru.reload
 
 bot = Cinch::Bot.new do
   configure do |c|

@@ -19,7 +19,7 @@ GEM
       cinch (~> 2.0)
     cinch-identify (1.5.0)
       cinch (~> 2.0)
-    configru (3.3.0)
+    configru (3.4.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fastimage (1.5.2)
@@ -81,7 +81,7 @@ DEPENDENCIES
   cinch!
   cinch-basic_ctcp (~> 1.0.0)
   cinch-identify (~> 1.5.0)
-  configru (~> 3.3.0)
+  configru (~> 3.4.0)
   fastimage (~> 1.5.0)
   ffi-aspell (~> 0.0.3)
   ffi-hunspell (~> 0.3.0)
