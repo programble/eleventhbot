@@ -8,6 +8,14 @@ require 'fastimage'
 require 'htmlentities'
 require 'twitter'
 
+# HACK: This fixes encoding errors for titles with unicode characters
+# See https://github.com/threedaymonk/htmlentities/blob/master/lib/htmlentities/decoder.rb#L24-L32
+class HTMLEntities::Decoder
+  def prepare(s)
+    s.to_s
+  end
+end
+
 module EleventhBot
   class Snarf
     include Plugin, Cinch::Plugin
