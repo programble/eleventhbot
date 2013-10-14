@@ -151,10 +151,8 @@ module EleventhBot
       return
     end
 
-    [:message, :action].each do |event|
-      match /(https?:\/\/[^ >]+)/, use_prefix: false, use_suffix: false,
-        method: :snarf, react_on: event
-    end
+    match /(https?:\/\/[^ >\x01]+)/, use_prefix: false, use_suffix: false,
+      method: :snarf
     def snarf(m, uri)
       uri = URI(uri)
       begin
