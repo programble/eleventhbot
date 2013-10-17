@@ -15,7 +15,17 @@ module EleventhBot
       if ip? name
         m.reply(Resolv.getnames(name).join(', '), true)
       else
-        m.reply(Resolv.getaddresses(name).join(', '), true)
+        path = [name]
+        Resolv::DNS.open do |dns|
+          while cname = dns.getresources(path.last, Resolv::DNS::Resource::IN::CNAME).first
+            path << cname.name
+          end
+          aaaa = dns.getresources(path.last, Resolv::DNS::Resource::IN::AAAA)
+          a = dns.getresources(path.last, Resolv::DNS::Resource::IN::A)
+          return if aaaa.empty? && a.empty?
+          path << (aaaa + a).map(&:address).join(', ')
+        end
+        m.reply(path.join(' -> '), true)
       end
     end
 
