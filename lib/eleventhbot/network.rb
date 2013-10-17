@@ -18,15 +18,14 @@ module EleventhBot
         path = [name]
         Resolv::DNS.open do |dns|
           while cname = dns.getresources(path.last, Resolv::DNS::Resource::IN::CNAME).first
-            return m.reply("CNAME loop: #{path.join(' -> ')}", true) if path.include? cname.name
+            break if path.include? cname.name
             path << cname.name
           end
           aaaa = dns.getresources(path.last, Resolv::DNS::Resource::IN::AAAA)
           a = dns.getresources(path.last, Resolv::DNS::Resource::IN::A)
-          return if aaaa.empty? && a.empty?
-          path << (aaaa + a).map(&:address).join(', ')
+          path << (aaaa + a).map(&:address).join(', ') unless aaaa.empty? && a.empty?
         end
-        m.reply(path.join(' -> '), true)
+        m.reply(path.join(' -> '), true) if path.length > 1
       end
     end
 
