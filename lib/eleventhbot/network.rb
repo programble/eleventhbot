@@ -18,7 +18,7 @@ module EleventhBot
         path = [name]
         Resolv::DNS.open do |dns|
           while cname = dns.getresources(path.last, Resolv::DNS::Resource::IN::CNAME).first
-            return m.reply('Error: CNAME loop', true) if path.include? cname.name
+            return m.reply("CNAME loop: #{path.join(' -> ')}", true) if path.include? cname.name
             path << cname.name
           end
           aaaa = dns.getresources(path.last, Resolv::DNS::Resource::IN::AAAA)
