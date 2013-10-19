@@ -2,7 +2,7 @@ module EleventhBot
   class Plugin::Karma
     include Plugin, Cinch::Plugin
 
-    match /^(\S+)(\+\+|--)/, use_prefix: false, method: :incdec
+    match /^(\S+)(\+\+|--)/, use_prefix: false, use_suffix: false, method: :incdec
     def incdec(m, target, op)
       target.downcase!
       redis.hincrby(:karma, target, (op == '++') ? 1 : -1)
