@@ -1,7 +1,7 @@
 require 'pstore'
 
 module EleventhBot
-  class Karma
+  class Plugin::Karma
     include Plugin, Cinch::Plugin
 
     configru do

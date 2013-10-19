@@ -1,5 +1,5 @@
 module EleventhBot
-  class Channels
+  class Plugin::Channels
     include Plugin, Cinch::Plugin
 
     configru do

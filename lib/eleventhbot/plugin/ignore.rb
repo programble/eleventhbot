@@ -1,5 +1,5 @@
 module EleventhBot
-  class Ignore
+  class Plugin::Ignore
     include Plugin, Cinch::Plugin
 
     configru do

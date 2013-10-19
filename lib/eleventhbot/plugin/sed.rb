@@ -1,7 +1,7 @@
 # Port of https://github.com/tsion/reggie
 
 module EleventhBot
-  class Sed
+  class Plugin::Sed
     include Plugin, Cinch::Plugin
 
     configru do

@@ -2,7 +2,7 @@ require 'open-uri'
 require 'json'
 
 module EleventhBot
-  class Freebase
+  class Plugin::Freebase
     include Plugin, Cinch::Plugin
 
     BASE_URL = 'https://www.googleapis.com/freebase/v1/'

@@ -5,7 +5,7 @@ require 'open-uri'
 require 'time-lord'
 
 module EleventhBot
-  class Github
+  class Plugin::Github
     include Plugin, Cinch::Plugin
 
     command :ghstatus, /ghstatus/,

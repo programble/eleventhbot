@@ -1,5 +1,5 @@
 module EleventhBot
-  class Admin
+  class Plugin::Admin
     include Plugin, Cinch::Plugin
 
     configru do

@@ -1,5 +1,5 @@
 module EleventhBot
-  class Acronym
+  class Plugin::Acronym
     include Plugin, Cinch::Plugin
 
     configru do

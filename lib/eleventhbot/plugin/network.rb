@@ -2,7 +2,7 @@ require 'ipaddr'
 require 'resolv'
 
 module EleventhBot
-  class Network
+  class Plugin::Network
     include Plugin, Cinch::Plugin
 
     def ip? ip

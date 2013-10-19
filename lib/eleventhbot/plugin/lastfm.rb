@@ -5,7 +5,7 @@ require 'lastfm'
 require 'time-lord'
 
 module EleventhBot
-  class Lastfm
+  class Plugin::Lastfm
     include Plugin, Cinch::Plugin
 
     configru do

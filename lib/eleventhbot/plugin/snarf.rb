@@ -17,7 +17,7 @@ class HTMLEntities::Decoder
 end
 
 module EleventhBot
-  class Snarf
+  class Plugin::Snarf
     include Plugin, Cinch::Plugin
 
     configru do

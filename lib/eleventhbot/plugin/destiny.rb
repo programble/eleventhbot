@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module EleventhBot
-  class Destiny
+  class Plugin::Destiny
     include Plugin, Cinch::Plugin
 
     PHRASES = [

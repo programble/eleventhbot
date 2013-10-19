@@ -2,7 +2,7 @@ require 'pkgwat'
 require 'nokogiri'
 
 module EleventhBot
-  class Fedora
+  class Plugin::Fedora
     include Plugin, Cinch::Plugin
 
     def get_version(pkg)

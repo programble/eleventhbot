@@ -1,5 +1,5 @@
 module EleventhBot
-  class Help
+  class Plugin::Help
     include Plugin, Cinch::Plugin
 
     def bot_plugins

@@ -1,6 +1,6 @@
 require 'unicode_utils'
 
-module EleventhBot
+module EleventhBot::Plugin
   class Unicode
     include Plugin, Cinch::Plugin
 

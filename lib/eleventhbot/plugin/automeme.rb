@@ -1,7 +1,7 @@
 require 'open-uri'
 
 module EleventhBot
-  class Automeme
+  class Plugin::Automeme
     include Plugin, Cinch::Plugin
 
     def initialize(*args)

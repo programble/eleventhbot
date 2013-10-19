@@ -1,5 +1,5 @@
 module EleventhBot
-  class Spell
+  class Plugin::Spell
     include Plugin, Cinch::Plugin
 
     configru do

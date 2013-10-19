@@ -1,5 +1,5 @@
 module EleventhBot
-  class RateLimit
+  class Plugin::RateLimit
     include Plugin, Cinch::Plugin
 
     configru do

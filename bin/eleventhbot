@@ -8,7 +8,7 @@ require 'cinch/plugins/basic_ctcp'
 require 'cinch/plugins/identify'
 
 $LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'eleventhbot'
+require 'eleventhbot/plugin'
 
 Configru.load('eleventhbot.yml') do
   option_group :irc do
@@ -39,7 +39,7 @@ Configru.load('eleventhbot.yml') do
   end
 end
 
-Configru.plugins.map {|r| require("eleventhbot/#{r}") }
+Configru.plugins.map {|r| require("eleventhbot/plugin/#{r}") }
 Configru.reload
 
 bot = Cinch::Bot.new do
