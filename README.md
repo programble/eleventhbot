@@ -174,10 +174,8 @@ Prevents users matching masks from using commands.
 
 ```yaml
 plugins:
+  - redis
   - karma
-
-karma:
-  pstore: karma.pstore
 ```
 
 Commands: `karma`
