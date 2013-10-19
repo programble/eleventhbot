@@ -32,7 +32,7 @@ plugins:
   - spell
 
 redis:
-  uri: redis://localhost:6379/
+  uri: redis://localhost:6379/0
 
 acronym:
   words: /usr/share/dict/words

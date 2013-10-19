@@ -234,7 +234,7 @@ plugins:
   - redis
 
 redis:
-  uri: redis://localhost:6379/
+  uri: redis://localhost:6379/0
 ```
 
 Provides a connection to a [Redis](http://redis.io) server to other

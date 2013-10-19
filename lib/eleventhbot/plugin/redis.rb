@@ -7,7 +7,7 @@ module EleventhBot
     include Plugin, Cinch::Plugin
 
     configru do
-      option :uri, String, 'redis://localhost:6379/' do
+      option :uri, String, 'redis://localhost:6379/0' do
         transform {|u| URI(u) }
       end
     end
@@ -16,8 +16,7 @@ module EleventhBot
 
     def initialize(*args)
       super
-      @redis = ::Redis.new(host: config.uri.host, port: config.uri.port,
-                           password: config.uri.password)
+      @redis = ::Redis.new(url: config.uri)
     end
   end
 
