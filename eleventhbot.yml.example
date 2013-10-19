@@ -26,6 +26,7 @@ plugins:
   - lastfm
   - network
   - ratelimit
+  - redis
   - sed
   - snarf
   - spell
@@ -64,6 +65,9 @@ ratelimit:
   rate: 5
   time: 1 # seconds
   cooldown: 5 #seconds
+
+redis:
+  uri: redis://localhost:6379/
 
 sed:
   memory: 5

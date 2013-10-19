@@ -17,6 +17,10 @@ group :lastfm do
   gem 'promise', '~> 0.2.0'
 end
 
+group :redis do
+  gem 'redis', '~> 3.0.0'
+end
+
 group :snarf do
   gem 'fastimage', '~> 1.5.0'
   gem 'htmlentities', '~> 4.3.0'

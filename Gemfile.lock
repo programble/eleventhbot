@@ -56,6 +56,7 @@ GEM
       thor
     promise (0.2.1)
     rake (10.1.0)
+    redis (3.0.5)
     sanitize (2.0.6)
       nokogiri (>= 1.4.4)
     simple_oauth (0.2.0)
@@ -90,6 +91,7 @@ DEPENDENCIES
   nokogiri (~> 1.6.0)
   pkgwat (~> 0.1.4)
   promise (~> 0.2.0)
+  redis (~> 3.0.0)
   time-lord (~> 1.0.0)
   twitter (= 5.0.0.rc.1)
   unicode_utils (~> 1.4.0)

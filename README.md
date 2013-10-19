@@ -230,6 +230,19 @@ ratelimit:
 
 Limits the number of commands that can be run in a period of time.
 
+### Redis
+
+```yaml
+plugins:
+  - redis
+
+redis:
+  uri: redis://localhost:6379/
+```
+
+Provides a connection to a [Redis](http://redis.io) server to other
+plugins.
+
 ### Sed
 
 ```yaml
