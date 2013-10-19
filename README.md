@@ -186,13 +186,12 @@ Keeps track of karma increased by "thing++" and decreased by "thing--".
 
 ```yaml
 plugins:
+  - redis
   - lastfm
 
 lastfm:
   token: 00000000000000000000000000000000
   secret: 00000000000000000000000000000000
-  pstore: lastfm.pstore # File to store user associations in
-  chart: lastfm.chart # File to cache artist charts in
 ```
 
 Commands: `assoc`, `assoc?`, `last`, `inform`, `first`, `compare`,

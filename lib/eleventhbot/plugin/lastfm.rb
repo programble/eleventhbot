@@ -1,6 +1,3 @@
-require 'pstore'
-
-require 'future'
 require 'lastfm'
 require 'time-lord'
 
@@ -11,25 +8,20 @@ module EleventhBot
     configru do
       option_required :token, String
       option_required :secret, String
-
-      option :pstore, String, 'lastfm.pstore'
-      option :chart, String, 'lastfm.chart'
     end
 
     def initialize(*args)
       super
 
-      @pstore = PStore.new(config.pstore)
       @lastfm = ::Lastfm.new(config.token, config.secret)
 
-      # TODO: Expire this cache?
-      @chart_top = future do
-        if File.exist? config.chart
-          File.readlines(config.chart).map(&:chomp)
-        else
-          chart = @lastfm.chart.get_top_artists(:limit => 0).map {|x| x['name'] }
-          File.open(config.chart, 'w') {|f| f.puts(chart) }
-          chart
+      unless redis.exists('lastfm:chart')
+        Thread.new do
+          chart = @lastfm.chart.get_top_artists(:limit => 0)
+          redis.pipelined do
+            redis.sadd('lastfm:chart', chart.map {|x| x['name'] })
+            redis.expire('lastfm:chart', 2.weeks)
+          end
         end
       end
     end
@@ -43,8 +35,8 @@ module EleventhBot
       end
     end
 
-    def pstore_get(m)
-      @pstore.transaction(true) { @pstore[m.user.nick] } || m.user.nick
+    def account(m)
+      redis.hget('lastfm:accounts', m.user.nick) || m.user.nick
     end
 
     def format_track(track, ago = true)
@@ -63,8 +55,7 @@ module EleventhBot
       'associate? [nick]: Show which Last.fm account is associated with a nick'
     def associate?(m, nick)
       nick ||= m.user.nick
-      assoc = @pstore.transaction(true) { @pstore[nick] }
-      if assoc
+      if assoc = redis.hget('lastfm:accounts', nick)
         m.reply("#{nick} is associated with the Last.fm account '#{assoc}'")
       else
         m.reply("#{nick} is not associated with a Last.fm account")
@@ -74,14 +65,14 @@ module EleventhBot
     command :associate, /assoc(?:iate)? (\S+)/,
       'associate {username}: Associate your nick with a Last.fm account'
     def associate(m, user)
-      @pstore.transaction { @pstore[m.user.nick] = user }
+      redis.hset('lastfm:accounts', m.user.nick, user)
       m.reply("Your nick is now associated with the Last.fm account '#{user}'", true)
     end
 
     command :last, /last(?: -(\d+))?(?: (\S+))?/,
       'last [-n] [username]: Show the nth to last track scrobbled by a Last.fm user'
     def last(m, index, user)
-      user ||= pstore_get(m)
+      user ||= account(m)
       index = index ? index.to_i : 1
       api_transaction(m) do
         track = @lastfm.user.get_recent_tracks(user)[index - 1]
@@ -92,7 +83,7 @@ module EleventhBot
     command :inform, /inform (#\S+)/,
       'inform {channel}: Inform a channel of what you are scrobbling to Last.fm'
     def inform(m, channel)
-      user = pstore_get(m)
+      user = account(m)
       return m.reply("Your nick is not associated with a Last.fm account", true) unless user
       api_transaction(m) do
         track = @lastfm.user.get_recent_tracks(user).first
@@ -107,7 +98,7 @@ module EleventhBot
     command :first, /first(?: (\S+))?/,
       'first [username]: Show the first track scrobbled by a Last.fm user'
     def first(m, user)
-      user ||= pstore_get(m)
+      user ||= account(m)
       api_transaction(m) do
         track = @lastfm.user.get_recent_tracks(:user => user,
                                                :limit => 1,
@@ -119,7 +110,7 @@ module EleventhBot
     command :plays, /plays(?: (\S+))?/,
       'plays [username]: Show the number of scrobbles by a Last.fm user'
     def plays(m, user)
-      user ||= pstore_get(m)
+      user ||= account(m)
       api_transaction(m) do
         info = @lastfm.user.get_info(user)
         registered = Time.at(info['registered']['unixtime'].to_i)
@@ -130,7 +121,7 @@ module EleventhBot
     command :compare, /compare (\S+)(?: (\S+))?/,
       'compare {username} [username]: Compare the tastes of two Last.fm users'
     def compare(m, user1, user2)
-      user2 ||= pstore_get(m)
+      user2 ||= account(m)
       api_transaction(m) do
         compare = @lastfm.tasteometer.compare(:user, :user, user1, user2)
         score = compare['score'].to_f * 100
@@ -154,7 +145,7 @@ module EleventhBot
     command :bestfriend, /bestfriend(?: (\S+))?/,
       'bestfriend [username]: Find the friend with most similar taste of a Last.fm user'
     def bestfriend(m, user)
-      user ||= pstore_get(m)
+      user ||= account(m)
       api_transaction(m) do
         friends = @lastfm.user.get_friends(:user => user, :limit => 0).map {|x| x['name'] }
         scores = Hash.new
@@ -172,7 +163,7 @@ module EleventhBot
         total_weight = user_top.map {|x| x['playcount'].to_i }.reduce(:+)
         score = 0
         user_top.each do |artist|
-          score += artist['playcount'].to_i if @chart_top.include?(artist['name'])
+          score += artist['playcount'].to_i if redis.sismember('lastfm:chart', artist['name'])
         end
         score.to_f / total_weight * 100.0
       end
@@ -181,7 +172,7 @@ module EleventhBot
     command :hipster, /hipster(?: -(\S+))?(?: (\S+))?/,
       "hipster [-period] [username]: Calculate how mainstream a Last.fm user's taste is over a period"
     def hipster(m, period, user)
-      user ||= pstore_get(m)
+      user ||= account(m)
       hipster = calculate_hipster(m, period || 'overall', user)
       m.reply("#{user} is #{'%0.2f' % hipster}% mainstream")
     end
@@ -199,7 +190,7 @@ module EleventhBot
     command :topartists, /topartists(?: -(\S+))?(?: (\S+))?/,
       "topartists [-period] [username]: List a Last.fm user's top listened artists over a period"
     def topartists(m, period, user)
-      user ||= pstore_get(m)
+      user ||= account(m)
       api_transaction(m) do
         top = @lastfm.user.get_top_artists(:user => user,
                                            :period => period || 'overall',
@@ -212,7 +203,7 @@ module EleventhBot
     command :topalbums, /topalbums(?: -(\S+))?(?: (\S+))?/,
       "topalbums [-period] [username]: List a Last.fm user's top listened albums over a period"
     def topalbums(m, period, user)
-      user ||= pstore_get(m)
+      user ||= account(m)
       api_transaction(m) do
         top = @lastfm.user.get_top_albums(:user => user,
                                           :period => period || 'overall',
@@ -225,7 +216,7 @@ module EleventhBot
     command :toptracks, /toptracks(?: -(\S+))?(?: (\S+))?/,
       "toptracks [-period] [username]: List a Last.fm user's top listened tracks over a period"
     def toptracks(m, period, user)
-      user ||= pstore_get(m)
+      user ||= account(m)
       api_transaction(m) do
         top = @lastfm.user.get_top_tracks(:user => user,
                                           :period => period || 'overall',
