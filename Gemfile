@@ -5,7 +5,7 @@ gem 'cinch-basic_ctcp', '~> 1.0.0'
 gem 'cinch-identify', '~> 1.5.0'
 gem 'configru', '~> 3.6.0'
 
-gem 'time-lord', '~> 1.0.0', group: [:lastfm, :github]
+gem 'time-lord', '~> 1.0.0', group: [:lastfm, :github, :snarf]
 
 group :fedora do
   gem 'nokogiri', '~> 1.6.0'
@@ -25,6 +25,7 @@ group :snarf do
   gem 'fastimage', '~> 1.5.0'
   gem 'htmlentities', '~> 4.3.0'
   gem 'twitter', '5.0.0.rc.1'
+  gem 'octokit', '~> 2.4.0'
 end
 
 group :spell do

@@ -7,6 +7,8 @@ require 'timeout'
 require 'fastimage'
 require 'htmlentities'
 require 'twitter'
+require 'octokit'
+require 'time-lord'
 
 # HACK: This fixes encoding errors for titles with unicode characters
 # See https://github.com/threedaymonk/htmlentities/blob/master/lib/htmlentities/decoder.rb#L24-L32
@@ -151,13 +153,28 @@ module EleventhBot
       return
     end
 
+    def snarf_github(uri)
+      if uri.host == 'github.com' && match = %r"/([^/]+/[^/]+)$".match(uri.request_uri)
+        repo = match[1]
+        info = Octokit.repo(repo)
+        s = "#{repo}: #{info[:description]} [last commit #{info[:pushed_at].ago.to_words}]"
+        s << " <#{info[:homepage]}>" unless info[:homepage].empty?
+        s
+      end
+    rescue Octokit::NotFound
+      return
+    rescue Octokit::Error
+      warn e.inspect
+      return
+    end
+
     match /(https?:\/\/[^ >\x01]+)/, use_prefix: false, use_suffix: false,
       method: :snarf
     def snarf(m, uri)
       uri = URI(uri)
       begin
         Timeout.timeout(config.timeout) do
-          m.reply(snarf_tweet(uri) || snarf_http(uri))
+          m.reply(snarf_tweet(uri) || snarf_github(uri) || snarf_http(uri))
         end
       rescue Timeout::Error
         warn 'timeout'

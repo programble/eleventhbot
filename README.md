@@ -274,9 +274,9 @@ snarf:
 ```
 
 Retrieves titles for HTML links, reports dimensions of links to images,
-and optionally retrieves tweet information and text for Twitter status
-links. A Twitter API key can be obtained from [Twitter
-Developers](https://dev.twitter.com/apps/new).
+gives specialized output for GitHub repositories, and optionally retrieves
+tweet information and text for Twitter status links. A Twitter API key can be
+obtained from [Twitter Developers](https://dev.twitter.com/apps/new).
 
 ### Spell
 
