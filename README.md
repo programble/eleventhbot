@@ -222,6 +222,18 @@ plugins:
 
 Dummy plugin.
 
+### Memory
+
+```yaml
+plugins:
+  - memory
+
+memory:
+  lines: 5
+```
+
+Remembers recent messages for other plugins.
+
 ### Rate Limit
 
 ```yaml
@@ -253,10 +265,8 @@ plugins.
 
 ```yaml
 plugins:
+  - memory
   - sed
-
-sed:
-  memory: 5 # Number of previous lines to remember
 ```
 
 Provides sed-like modification of previous lines using `s/ma/re/`
@@ -291,6 +301,7 @@ obtained from [Twitter Developers](https://dev.twitter.com/apps/new).
 
 ```yaml
 plugins:
+  - memory
   - spell
 
 spell:

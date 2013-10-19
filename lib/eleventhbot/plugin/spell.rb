@@ -36,18 +36,13 @@ module EleventhBot
       end
     end
 
-    listen_to :message
-    def listen(m)
-      @last[m.channel] = m unless @bot.config.plugins.prefix === m.message
-    end
-
     command :spell, /spell(\+*)(?: (.+))?/,
       "spell[+*] [text]: Correct spelling of text or last line in channel, replacing words with the nth suggestion based on the number of +'s"
     def spell(m, i, s)
       if s
         m.reply(correct(s, i.length), true)
       else
-        last = @last[m.channel]
+        last = memory.channel(m).first
         if last.action?
           m.reply("* #{last.user.nick} #{correct(last.action_message, i.length)}")
         else

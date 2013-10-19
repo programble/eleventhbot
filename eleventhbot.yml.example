@@ -12,6 +12,7 @@ irc:
     password: password
 
 plugins:
+  - memory
   - redis
   - acronym
   - admin
@@ -31,6 +32,9 @@ plugins:
   - sed
   - snarf
   - spell
+
+memory:
+  lines: 5
 
 redis:
   uri: redis://localhost:6379/0
