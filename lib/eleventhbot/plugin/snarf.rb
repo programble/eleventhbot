@@ -158,7 +158,7 @@ module EleventhBot
         repo = match[1]
         info = Octokit.repo(repo)
         s = "#{repo}: #{info[:description]} [last commit #{info[:pushed_at].ago.to_words}]"
-        s << " <#{info[:homepage]}>" unless info[:homepage].empty?
+        s << " <#{info[:homepage]}>" if info[:homepage]
         s
       end
     rescue Octokit::NotFound
