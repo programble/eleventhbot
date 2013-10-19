@@ -2,7 +2,7 @@ module EleventhBot
   class Plugin::Meep
     include Plugin, Cinch::Plugin
 
-    match /`meep/, use_prefix: false
+    match /meep/, prefix: /^`/
     def execute(m)
       m.reply('meep')
     end
