@@ -21,11 +21,11 @@ Configru.load('eleventhbot.yml') do
 
     option_array :channels, String
 
-    option :nickserv, String, ''
+    option :nickserv, String
 
     option_group :sasl do
-      option :username, String, ''
-      option :password, String, ''
+      option :username, String
+      option :password, String
     end
   end
 
@@ -56,7 +56,7 @@ bot = Cinch::Bot.new do
 
     c.plugins.options[Cinch::Plugins::BasicCTCP][:commands] = [:version, :time, :ping]
 
-    unless Configru.irc.nickserv.empty?
+    if Configru.irc.nickserv
       c.plugins.options[Cinch::Plugins::Identify] = {
         :type => :nickserv,
         :username => Configru.irc.nick,
@@ -64,7 +64,7 @@ bot = Cinch::Bot.new do
       }
     end
 
-    unless Configru.irc.sasl.username.empty?
+    if Configru.irc.sasl.username
       c.sasl.username = Configru.irc.sasl.username
       c.sasl.password = Configru.irc.sasl.password
     end

@@ -36,14 +36,14 @@ module EleventhBot
       end
 
       option_group :twitter do
-        option :key, String, ''
-        option :secret, String, ''
+        option :key, String
+        option :secret, String
       end
     end
 
     def initialize(*args)
       super
-      if !config.twitter['key'].empty?
+      if config.twitter['key']
         @twitter = Twitter::REST::Client.new do |c|
           c.consumer_key = config.twitter['key']
           c.consumer_secret = config.twitter['secret']

@@ -8,11 +8,11 @@ module EleventhBot
     BASE_URL = 'https://www.googleapis.com/freebase/v1/'
 
     configru do
-      option :key, String, ''
+      option :key, String
     end
 
     def api(req, params = {})
-      params[:key] = config['key'] unless config['key'].empty?
+      params[:key] = config['key'] if config['key']
       url = BASE_URL + req + ?? + params.map {|k, v| "#{k}=#{URI.escape(v)}" }.join(?&)
       open(url) do |res|
         JSON.parse(res.read)
