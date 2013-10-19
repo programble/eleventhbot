@@ -114,7 +114,7 @@ module EleventhBot
       end
 
       begin
-        load("eleventhbot/#{name}.rb")
+        load("eleventhbot/plugin/#{name}.rb")
       rescue Exception => e
         m.reply(e.message.capitalize, true)
         raise
