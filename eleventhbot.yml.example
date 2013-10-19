@@ -12,6 +12,7 @@ irc:
     password: password
 
 plugins:
+  - redis
   - acronym
   - admin
   - automeme
@@ -26,10 +27,12 @@ plugins:
   - lastfm
   - network
   - ratelimit
-  - redis
   - sed
   - snarf
   - spell
+
+redis:
+  uri: redis://localhost:6379/
 
 acronym:
   words: /usr/share/dict/words
@@ -65,9 +68,6 @@ ratelimit:
   rate: 5
   time: 1 # seconds
   cooldown: 5 #seconds
-
-redis:
-  uri: redis://localhost:6379/
 
 sed:
   memory: 5
