@@ -213,6 +213,15 @@ Commands: `host`, `dns`
 
 Provides information about network-related things. e.g., DNS lookups.
 
+### Meep
+
+```yaml
+plugins:
+  - meep
+```
+
+Dummy plugin.
+
 ### Rate Limit
 
 ```yaml

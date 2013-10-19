@@ -26,6 +26,7 @@ plugins:
   - karma
   - lastfm
   - network
+  - meep
   - ratelimit
   - sed
   - snarf

@@ -74,10 +74,6 @@ bot = Cinch::Bot.new do
       c.plugins.options[plugin] = Configru[plugin.plugin_name]
     end
   end
-
-  on :message, '`meep' do |m|
-    m.reply('meep')
-  end
 end
 
 bot.start
