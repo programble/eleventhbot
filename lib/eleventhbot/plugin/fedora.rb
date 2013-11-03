@@ -27,7 +27,11 @@ module EleventhBot
       'pkgwat {package}: Get version numbers for Fedora packages'
     def pkgwat(m, pkg)
       v = get_version(pkg)
-      m.reply v.map { |f| "#{Format(:bold, f['release'])}: s: #{f['stable_version']}, t: #{f['testing_version']}" }.join(', ')
+      if v.all? { |f| f['testing_version'] == 'None' && f['stable_version'] == 'None' }
+        m.reply 'No such package seems to exist. :-('
+      else
+        m.reply v.map { |f| "#{Format(:bold, f['release'])}: s: #{f['stable_version']}, t: #{f['testing_version']}" }.join(', ')
+      end
     end
   end
 end
