@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'forecast_io'
 require 'time-lord'
 require 'wunderground'
