@@ -5,7 +5,7 @@ gem 'cinch-basic_ctcp', '~> 1.0.0'
 gem 'cinch-identify', '~> 1.5.0'
 gem 'configru', '~> 3.6.0'
 
-gem 'time-lord', '~> 1.0.0', group: [:lastfm, :github, :snarf]
+gem 'time-lord', '~> 1.0.0', group: [:lastfm, :github, :snarf, :weather]
 
 group :fedora do
   gem 'nokogiri', '~> 1.6.0'
