@@ -4,6 +4,16 @@ GIT
   specs:
     cinch (2.0.9)
 
+GIT
+  remote: https://github.com/programble/wunderground.git
+  revision: e1647d7930e6432b2a8903d50ab595834f25693b
+  branch: uri-encode
+  specs:
+    wunderground (1.1.0)
+      addressable
+      httparty (> 0.6.0)
+      json (> 1.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,6 +39,11 @@ GEM
       ffi (>= 1.0.11)
     ffi-hunspell (0.3.0)
       ffi (~> 1.0)
+    forecast_io (2.0.0)
+      faraday
+      hashie
+      multi_json
+    hashie (2.0.5)
     htmlentities (4.3.1)
     http (0.5.0)
       http_parser.rb
@@ -92,6 +107,7 @@ DEPENDENCIES
   fastimage (~> 1.5.0)
   ffi-aspell (~> 0.0.3)
   ffi-hunspell (~> 0.3.0)
+  forecast_io (~> 2.0.0)
   htmlentities (~> 4.3.0)
   lastfm (~> 1.21.0)
   nokogiri (~> 1.6.0)
@@ -102,3 +118,4 @@ DEPENDENCIES
   time-lord (~> 1.0.0)
   twitter (= 5.0.0.rc.1)
   unicode_utils (~> 1.4.0)
+  wunderground!

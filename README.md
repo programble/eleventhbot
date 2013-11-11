@@ -315,6 +315,25 @@ Uses [Hunspell](http://hunspell.sourceforge.net) or
 [Aspell](http://aspell.net) to correct spelling. The selected checker
 and dictionary must be installed.
 
+### Weather
+
+```yaml
+plugins:
+  - weather
+
+weather:
+  forecastio:
+    key: 00000000000000000000000000000000
+  wunderground:
+    key: 0000000000000000
+```
+
+Commands: `weather`
+
+Retrieves weather conditions and forecasts from
+[Wunderground](http://www.wunderground.com/weather/api/) and
+[Forecast.io](https://developer.forecast.io/).
+
 ## License
 
 Copyright © 2013, Curtis McEnroe <programble@gmail.com>

@@ -32,6 +32,7 @@ plugins:
   - sed
   - snarf
   - spell
+  - weather
 
 memory:
   lines: 5
@@ -93,3 +94,9 @@ snarf:
 spell:
   checker: hunspell # hunspell or aspell
   language: en_US
+
+weather:
+  forecastio:
+    key: 00000000000000000000000000000000
+  wunderground:
+    key: 0000000000000000

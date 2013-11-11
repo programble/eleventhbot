@@ -36,3 +36,8 @@ end
 group :unicode do
   gem 'unicode_utils', '~> 1.4.0'
 end
+
+group :weather do
+  gem 'wunderground', git: 'https://github.com/programble/wunderground.git', branch: 'uri-encode'
+  gem 'forecast_io', '~> 2.0.0'
+end
