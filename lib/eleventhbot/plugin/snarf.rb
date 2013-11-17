@@ -60,7 +60,7 @@ module EleventhBot
     end
 
     def snarf_html(buffer)
-      if match = /<title[^>]*>(.+)<\/title>/mi.match(buffer)
+      if match = /<title[^>]*>(.+?)<\/title>/mi.match(buffer)
         title = HTMLEntities.new.decode(match[1].gsub(/\s+/, ' ')).strip
         s = String.new
         s << '"'
