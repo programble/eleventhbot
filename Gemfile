@@ -24,7 +24,7 @@ end
 group :snarf do
   gem 'fastimage', '~> 1.5.0'
   gem 'htmlentities', '~> 4.3.0'
-  gem 'twitter', '5.0.0.rc.1'
+  gem 'twitter', '~> 5.2.0'
   gem 'octokit', '~> 2.4.0'
 end
 

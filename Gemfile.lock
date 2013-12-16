@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/cinchrb/cinch.git
-  revision: a47bd7c41c501f3efb7d3d0ebd6da65fd9ea682d
+  revision: 170c1905c21c7502e8956c4565d52aee52447c34
   specs:
-    cinch (2.0.10)
+    cinch (2.0.11)
 
 GIT
   remote: https://github.com/programble/wunderground.git
@@ -25,12 +25,14 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
     atomic (1.1.14)
-    buftok (0.1)
+    buftok (0.2.0)
     cinch-basic_ctcp (1.0.2)
       cinch (~> 2.0)
     cinch-identify (1.5.1)
       cinch (~> 2.0)
     configru (3.6.0)
+    descendants_tracker (0.0.3)
+    equalizer (0.0.7)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fastimage (1.5.4)
@@ -48,7 +50,7 @@ GEM
     htmlentities (4.3.1)
     http (0.5.0)
       http_parser.rb
-    http_parser.rb (0.5.3)
+    http_parser.rb (0.6.0)
     httparty (0.12.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -58,12 +60,14 @@ GEM
       activesupport (>= 3.2.0)
       httparty
       xml-simple
+    memoizable (0.2.0)
+      thread_safe (~> 0.1.3)
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
-    nokogiri (1.6.0)
+    nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     octokit (2.4.0)
       sawyer (~> 0.5.1)
@@ -86,12 +90,16 @@ GEM
     thread_safe (0.1.3)
       atomic
     time-lord (1.0.1)
-    twitter (5.0.0.rc.1)
-      buftok (~> 0.1.0)
+    twitter (5.2.0)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      descendants_tracker (~> 0.0.1)
+      equalizer (~> 0.0.7, != 0.0.8)
       faraday (>= 0.8, < 0.10)
-      http (>= 0.5.0.pre2, < 0.6)
-      http_parser.rb (~> 0.5.0)
+      http (~> 0.5.0)
+      http_parser.rb (~> 0.6.0)
       json (~> 1.8)
+      memoizable (~> 0.2.0)
       simple_oauth (~> 0.2.0)
     tzinfo (0.3.38)
     unicode_utils (1.4.0)
@@ -117,6 +125,6 @@ DEPENDENCIES
   promise (~> 0.2.0)
   redis (~> 3.0.0)
   time-lord (~> 1.0.0)
-  twitter (= 5.0.0.rc.1)
+  twitter (~> 5.2.0)
   unicode_utils (~> 1.4.0)
   wunderground!
