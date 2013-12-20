@@ -19,7 +19,7 @@ module EleventhBot
       # HACK: Ignore messages that are commands
       prefixes = bot.handlers.map(&:pattern).map(&:prefix).compact.uniq
       prefixes.delete(/^/)
-      unless prefixes.any? {|p| m.match(p, m.action? ? :action : :other) }
+      unless prefixes.any? {|p| m.match(p, m.action? ? :action : :other, true) }
         @channel_lines[m.channel].unshift(m).pop
         @user_lines[m.channel][m.user].unshift(m).pop
       end
