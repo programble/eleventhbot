@@ -25,7 +25,8 @@ module EleventhBot
           a = dns.getresources(path.last, Resolv::DNS::Resource::IN::A)
           path << (aaaa + a).map(&:address).join(', ') unless aaaa.empty? && a.empty?
         end
-        m.reply(path.join(' -> '), true) if path.length > 1
+        path << '' if path.length == 1
+        m.reply(path.join(' -> '), true)
       end
     end
 
