@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/cinchrb/cinch.git
-  revision: 170c1905c21c7502e8956c4565d52aee52447c34
+  revision: 3140f47a11bb1e6b6f5fc7cf3a1df75bd488115e
   specs:
     cinch (2.0.11)
 
@@ -32,10 +32,10 @@ GEM
       cinch (~> 2.0)
     configru (3.6.0)
     descendants_tracker (0.0.3)
-    equalizer (0.0.7)
-    faraday (0.8.8)
-      multipart-post (~> 1.2.0)
-    fastimage (1.5.4)
+    equalizer (0.0.9)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
+    fastimage (1.5.5)
       addressable (~> 2.3, >= 2.3.5)
     ffi (1.9.3)
     ffi-aspell (0.0.3)
@@ -56,17 +56,18 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
     json (1.8.1)
-    lastfm (1.21.0)
+    lastfm (1.22.0)
       activesupport (>= 3.2.0)
       httparty
       xml-simple
-    memoizable (0.2.0)
+    memoizable (0.4.0)
       thread_safe (~> 0.1.3)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.2)
+    multi_json (1.8.4)
     multi_xml (0.5.5)
-    multipart-post (1.2.0)
+    multipart-post (2.0.0)
+    naught (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     octokit (2.4.0)
@@ -78,11 +79,11 @@ GEM
       sanitize
       thor
     promise (0.2.1)
-    rake (10.1.0)
-    redis (3.0.6)
-    sanitize (2.0.6)
+    rake (10.1.1)
+    redis (3.0.7)
+    sanitize (2.1.0)
       nokogiri (>= 1.4.4)
-    sawyer (0.5.1)
+    sawyer (0.5.3)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     simple_oauth (0.2.0)
@@ -90,20 +91,21 @@ GEM
     thread_safe (0.1.3)
       atomic
     time-lord (1.0.1)
-    twitter (5.2.0)
+    twitter (5.6.0)
       addressable (~> 2.3)
       buftok (~> 0.2.0)
-      descendants_tracker (~> 0.0.1)
-      equalizer (~> 0.0.7, != 0.0.8)
-      faraday (>= 0.8, < 0.10)
+      descendants_tracker (~> 0.0.3)
+      equalizer (~> 0.0.9)
+      faraday (~> 0.9.0)
       http (~> 0.5.0)
       http_parser.rb (~> 0.6.0)
       json (~> 1.8)
-      memoizable (~> 0.2.0)
+      memoizable (~> 0.4.0)
+      naught (~> 1.0)
       simple_oauth (~> 0.2.0)
     tzinfo (0.3.38)
     unicode_utils (1.4.0)
-    xml-simple (1.1.2)
+    xml-simple (1.1.3)
 
 PLATFORMS
   ruby
@@ -118,13 +120,13 @@ DEPENDENCIES
   ffi-hunspell (~> 0.3.0)
   forecast_io (~> 2.0.0)
   htmlentities (~> 4.3.0)
-  lastfm (~> 1.21.0)
+  lastfm (~> 1.22.0)
   nokogiri (~> 1.6.0)
   octokit (~> 2.4.0)
   pkgwat (~> 0.1.4)
   promise (~> 0.2.0)
   redis (~> 3.0.0)
   time-lord (~> 1.0.0)
-  twitter (~> 5.2.0)
+  twitter (~> 5.6.0)
   unicode_utils (~> 1.4.0)
   wunderground!
