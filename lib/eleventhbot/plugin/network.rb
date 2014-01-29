@@ -13,7 +13,7 @@ module EleventhBot
       'host {hostname or IP}: Get IP addresses or reverse DNS for the given query'
     def host(m, name)
       if ip? name
-        m.reply(Resolv.getnames(name).join(', '), true)
+        m.reply("#{name} <- #{Resolv.getnames(name).join(', ')}", true)
       else
         path = [name]
         Resolv::DNS.open do |dns|
