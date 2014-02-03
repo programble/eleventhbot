@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/cinchrb/cinch.git
-  revision: 3140f47a11bb1e6b6f5fc7cf3a1df75bd488115e
+  revision: 44f22ca334d726dd271e3a2bc12917a9f4bc912d
   specs:
-    cinch (2.0.11)
+    cinch (2.0.12)
 
 GIT
   remote: https://github.com/programble/wunderground.git
@@ -35,7 +35,7 @@ GEM
     equalizer (0.0.9)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    fastimage (1.5.5)
+    fastimage (1.6.0)
       addressable (~> 2.3, >= 2.3.5)
     ffi (1.9.3)
     ffi-aspell (0.0.3)
@@ -56,7 +56,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
     json (1.8.1)
-    lastfm (1.22.0)
+    lastfm (1.23.0)
       activesupport (>= 3.2.0)
       httparty
       xml-simple
@@ -115,12 +115,12 @@ DEPENDENCIES
   cinch-basic_ctcp (~> 1.0.0)
   cinch-identify (~> 1.5.0)
   configru (~> 3.6.0)
-  fastimage (~> 1.5.0)
+  fastimage (~> 1.6.0)
   ffi-aspell (~> 0.0.3)
   ffi-hunspell (~> 0.3.0)
   forecast_io (~> 2.0.0)
   htmlentities (~> 4.3.0)
-  lastfm (~> 1.22.0)
+  lastfm (~> 1.23.0)
   nokogiri (~> 1.6.0)
   octokit (~> 2.4.0)
   pkgwat (~> 0.1.4)

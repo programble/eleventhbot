@@ -13,7 +13,7 @@ group :fedora do
 end
 
 group :lastfm do
-  gem 'lastfm', '~> 1.22.0'
+  gem 'lastfm', '~> 1.23.0'
   gem 'promise', '~> 0.2.0'
 end
 
@@ -22,7 +22,7 @@ group :redis do
 end
 
 group :snarf do
-  gem 'fastimage', '~> 1.5.0'
+  gem 'fastimage', '~> 1.6.0'
   gem 'htmlentities', '~> 4.3.0'
   gem 'twitter', '~> 5.6.0'
   gem 'octokit', '~> 2.4.0'
