@@ -34,7 +34,7 @@ group :spell do
 end
 
 group :translate do
-  gem 'bing_translator', '~> 4.2.0'
+  gem 'bing_translator', '~> 4.3.0'
 end
 
 group :unicode do

@@ -326,7 +326,7 @@ translate:
   bing_client_secret: 00000000000000000000000000000000000000000000
 ```
 
-Commands: `trans`, `detect`
+Commands: `trans`, `detect`, `langname`
 
 Translates between and detects languages using Bing's free API. You will need
 to follow the instructions [here](https://github.com/CodeBlock/bing_translator-gem#getting-a-client-id-and-secret) to get a Bing client ID and secret.
