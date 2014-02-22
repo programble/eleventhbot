@@ -40,7 +40,8 @@ module EleventhBot
     command :detect, /detect (.+)/,
       'detect {text}: Detect the language of the text'
     def detect(m, text)
-      m.reply(@bing.detect(text))
+      code = @bing.detect(text).to_s
+      m.reply("#{@language_names[code]} (#{code})")
     end
 
     command :langname, /langname (\S+)/,
