@@ -24,8 +24,16 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    akami (1.2.1)
+      gyoku (>= 0.4.0)
+      nokogiri
     atomic (1.1.14)
+    bing_translator (4.2.1)
+      json (~> 1.8.0)
+      nokogiri (~> 1.6.0)
+      savon (~> 2.0)
     buftok (0.2.0)
+    builder (3.1.4)
     cinch-basic_ctcp (1.0.2)
       cinch (~> 2.0)
     cinch-identify (1.5.1)
@@ -46,6 +54,8 @@ GEM
       faraday
       hashie
       multi_json
+    gyoku (1.1.1)
+      builder (>= 2.1.2)
     hashie (2.0.5)
     htmlentities (4.3.1)
     http (0.5.0)
@@ -54,6 +64,9 @@ GEM
     httparty (0.12.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
+    httpi (2.1.0)
+      rack
+      rubyntlm (~> 0.3.2)
     i18n (0.6.9)
     json (1.8.1)
     lastfm (1.23.0)
@@ -62,6 +75,7 @@ GEM
       xml-simple
     memoizable (0.4.0)
       thread_safe (~> 0.1.3)
+    mime-types (1.25)
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.4)
@@ -70,6 +84,7 @@ GEM
     naught (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    nori (2.3.0)
     octokit (2.4.0)
       sawyer (~> 0.5.1)
     pkgwat (0.1.4)
@@ -79,10 +94,20 @@ GEM
       sanitize
       thor
     promise (0.2.1)
+    rack (1.5.2)
     rake (10.1.1)
     redis (3.0.7)
+    rubyntlm (0.3.4)
     sanitize (2.1.0)
       nokogiri (>= 1.4.4)
+    savon (2.3.3)
+      akami (~> 1.2.0)
+      builder (>= 2.1.2)
+      gyoku (~> 1.1.0)
+      httpi (~> 2.1.0)
+      nokogiri (>= 1.4.0)
+      nori (~> 2.3.0)
+      wasabi (~> 3.2.2)
     sawyer (0.5.3)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
@@ -105,12 +130,17 @@ GEM
       simple_oauth (~> 0.2.0)
     tzinfo (0.3.38)
     unicode_utils (1.4.0)
+    wasabi (3.2.3)
+      httpi (~> 2.0)
+      mime-types (< 2.0.0)
+      nokogiri (>= 1.4.0)
     xml-simple (1.1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bing_translator (~> 4.2.0)
   cinch!
   cinch-basic_ctcp (~> 1.0.0)
   cinch-identify (~> 1.5.0)
