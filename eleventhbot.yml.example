@@ -32,6 +32,7 @@ plugins:
   - sed
   - snarf
   - spell
+  - translate
   - weather
 
 memory:
@@ -94,6 +95,10 @@ snarf:
 spell:
   checker: hunspell # hunspell or aspell
   language: en_US
+
+translate:
+  bing_client_id: 0000000 # Required
+  bing_client_secret: 00000000000000000000000000000000000000000000 # Required
 
 weather:
   forecastio:
