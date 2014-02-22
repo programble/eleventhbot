@@ -315,6 +315,22 @@ Uses [Hunspell](http://hunspell.sourceforge.net) or
 [Aspell](http://aspell.net) to correct spelling. The selected checker
 and dictionary must be installed.
 
+### Translate
+
+```yaml
+plugins:
+  - translate
+
+translate:
+  bing_client_id: 0000000
+  bing_client_secret: 00000000000000000000000000000000000000000000
+```
+
+Commands: `trans`, `detect`, `langname`
+
+Translates between and detects languages using Bing's free API. You will need
+to follow the instructions [here](https://github.com/CodeBlock/bing_translator-gem#getting-a-client-id-and-secret) to get a Bing client ID and secret.
+
 ### Weather
 
 ```yaml

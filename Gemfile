@@ -33,6 +33,10 @@ group :spell do
   gem 'ffi-hunspell', '~> 0.3.0'
 end
 
+group :translate do
+  gem 'bing_translator', '~> 4.3.0'
+end
+
 group :unicode do
   gem 'unicode_utils', '~> 1.4.0'
 end
