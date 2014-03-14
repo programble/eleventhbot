@@ -40,7 +40,12 @@ module EleventhBot
       "spell[+*] [text]: Correct spelling of text or last line in channel, replacing words with the nth suggestion based on the number of +'s"
     def spell(m, i, s)
       if s
-        m.reply(correct(s, i.length), true)
+        corrected = correct(s, i.length)
+        if s == corrected
+          m.reply("'#{s}' was spelled correctly.", true)
+        else
+          m.reply(corrected, true)
+        end
       else
         last = memory.channel(m).first
         if last.action?
